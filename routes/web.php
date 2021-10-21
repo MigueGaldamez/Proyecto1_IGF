@@ -25,7 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/chat', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/consultas', function () {
     return Inertia::render('Consultas/Inicio');
-})->name('chat');
+})->name('consultas');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/chat/salas',[ChatController::class, 'salas']);
