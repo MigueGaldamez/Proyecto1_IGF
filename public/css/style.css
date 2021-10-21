@@ -45,6 +45,19 @@
   border: none;
   border-bottom:solid #a2a1a1 1px;
 }
+
+.contactForm select:focus{
+  background-color:   #1F2937;
+  color:#a2a1a1;
+
+}
+.contactForm select{
+  background-color:   #1F2937;
+  color:#a2a1a1;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom:solid #a2a1a1 1px;
+}
 .izquierdo{
   color: #666666;
   background-color:   
