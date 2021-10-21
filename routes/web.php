@@ -7,7 +7,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\publicoController;
 
 Route::get('/', function () {
-    return Inertia::render('Inicio', [
+    return Inertia::render('Publico/Inicio', [
         'canLogin' => Route::has('IniciarSesion'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
