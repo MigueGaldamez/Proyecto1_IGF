@@ -43,6 +43,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/consultasrealizadas', fun
     return Inertia::render('Consultas/ConsultasRealizadasCliente');
 })->name('consultasrealizadas');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/pagos', function () {
+    return Inertia::render('Especialistas/VerPagos');
+})->name('pagos');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/solicitudes', function () {
+    return Inertia::render('Especialistas/Solicitudes');
+})->name('solicitudes');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/chat/salas',[ChatController::class, 'salas']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/chat/salas/{salaId}/mensajes',[ChatController::class, 'mensajes']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/chat/salas/{salaId}/mensaje',[ChatController::class, 'nuevoMensaje']);
