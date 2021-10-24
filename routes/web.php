@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\publicoController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\TipoUsuarioController;
+use App\Http\Controllers\EspecialidadController;
 
 Route::get('/', function () {
     return Inertia::render('Publico/Inicio', [
@@ -55,3 +58,19 @@ Route::get('/iniciarSesion', function () {
 Route::get('/registro', function () {
     return Inertia::render('Publico/Registro');
 })->name('registro');
+
+//CRUDS
+Route::middleware(['auth:sanctum', 'verified'])->apiResource('/tipoUsuarios', TipoUsuarioController::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/tipoUsuario', function () {
+    return Inertia::render('TipoUsuario/Inicio');
+})->name('tipoUsuario.index');
+
+Route::middleware(['auth:sanctum', 'verified'])->apiResource('/clientes', ClienteController::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/clientes', function () {
+    return Inertia::render('Cliente/Inicio');
+})->name('cliente.index');
+
+Route::middleware(['auth:sanctum', 'verified'])->apiResource('/especialidads', EspecialidadController::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/especialidades', function () {
+    return Inertia::render('Especialidad/Inicio');
+})->name('especialidad.index');

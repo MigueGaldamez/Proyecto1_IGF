@@ -13,12 +13,22 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+     
+        Schema::create('tipoUsuario', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->timestamps();
+          
+        });
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('idTipoUsuario')->unsigned();
+            $table->foreign('idTipoUsuario')->references('id')->on('tipoUsuario');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
@@ -33,6 +43,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('tipoUsuario');
         Schema::dropIfExists('users');
     }
 }

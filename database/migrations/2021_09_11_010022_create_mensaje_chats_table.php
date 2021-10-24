@@ -15,8 +15,10 @@ class CreateMensajeChatsTable extends Migration
     {
         Schema::create('mensajeChat', function (Blueprint $table) {
             $table->id();
-            $table->integer('idSalaChat');
-            $table->integer('idUsuario');
+            $table->unsignedBigInteger('idSalaChat')->unsigned();
+            $table->foreign('idSalaChat')->references('id')->on('salaChat');
+            $table->unsignedBigInteger('idUsuario')->unsigned();
+            $table->foreign('idUsuario')->references('id')->on('users');
             $table->mediumText('mensaje');
             $table->timestamps();
         });
