@@ -8,6 +8,7 @@ use App\Http\Controllers\publicoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\TipoUsuarioController;
 use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\TarjetaController;
 
 Route::get('/', function () {
     return Inertia::render('Publico/Inicio', [
@@ -74,3 +75,8 @@ Route::middleware(['auth:sanctum', 'verified'])->apiResource('/especialidads', E
 Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/especialidades', function () {
     return Inertia::render('Especialidad/Inicio');
 })->name('especialidad.index');
+
+Route::middleware(['auth:sanctum', 'verified'])->apiResource('/tarjetas', TarjetaController::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/tarjetas', function () {
+    return Inertia::render('Tarjeta/Inicio');
+})->name('tarjeta.index');
