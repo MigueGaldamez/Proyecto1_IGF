@@ -28,31 +28,64 @@
                                     Chat
                                 </jet-nav-link>
                             </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('consultas')" :active="route().current('consultas')">
-                                    Consultas
+
+                        
+                             
+                              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('solicitudes')" :active="route().current('solicitudes')">
+                                   Revisar Solicitud
                                 </jet-nav-link>
                             </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('tipoUsuario.index')" :active="route().current('tipoUsuario.index')">
-                                    Tipos de Usuarios
+                              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('pagos')" :active="route().current('pagos')">
+                                    Ver pagos
                                 </jet-nav-link>
                             </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('cliente.index')" :active="route().current('cliente.index')">
-                                    Clientes
-                                </jet-nav-link>
-                            </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('especialidad.index')" :active="route().current('especialidad.index')">
-                                    Especialidades
-                                </jet-nav-link>
-                            </div>
+                           
+                          
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('tarjeta.index')" :active="route().current('tarjeta.index')">
                                    Tarjetas
                                 </jet-nav-link>
                             </div>
+                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" :active="route().current('clientesver','cliente.index','tipoUsuario.index')">
+                                    Usuarios
+                                </jet-nav-link>
+                                <ul class="dropdown-menu">
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('clientesver')" >Editar Cliente</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('asesores')">Editar Especialista</jet-nav-link></li>
+                                
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('clientesver')" >Listado clientes</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('asesores')" >Listado especialistas</jet-nav-link></li>
+                                </ul>
+                             </div>
+                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" :active="route().current('especialidad.index','cliente.index','tipoUsuario.index')">
+                                    Administracion
+                                </jet-nav-link>
+                                <ul class="dropdown-menu">
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('especialidad.index')" >Especialidades</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('cliente.index')">Clientes</jet-nav-link></li>
+                                
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('tipoUsuario.index')" >Tipo de usuarios</jet-nav-link></li>
+                                </ul>
+                             </div>
+                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" :active="route().current('consultas','cliente.index','tipoUsuario.index')">
+                                    Consultas
+                                </jet-nav-link>
+                                <ul class="dropdown-menu">
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultas')" >Ver Consultas</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultasrealizadas')">Consultas Cliente</jet-nav-link></li>
+                                
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('realizarconsulta')" >Realizar consulta</jet-nav-link></li>
+                                </ul>
+                             </div>
+                                
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">

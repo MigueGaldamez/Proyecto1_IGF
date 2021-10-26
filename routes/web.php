@@ -31,9 +31,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/consultas', function () {
     return Inertia::render('Consultas/Inicio');
 })->name('consultas');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/clientes', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/clientesver', function () {
     return Inertia::render('Clientes/Inicio');
-})->name('clientes');
+})->name('clientesver');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/asesores', function () {
     return Inertia::render('Especialistas/Inicio');

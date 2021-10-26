@@ -1153,6 +1153,9 @@ select {
 .col-span-5 {
 	grid-column: span 5 / span 5;
 }
+.col-auto {
+	grid-column: auto;
+}
 .float-right {
 	float: right;
 }
@@ -1608,10 +1611,6 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
 }
-.bg-green-100 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(209, 250, 229, var(--tw-bg-opacity));
-}
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
 }
@@ -1634,14 +1633,14 @@ select {
 .p-6 {
 	padding: 1.5rem;
 }
+.p-4 {
+	padding: 1rem;
+}
 .p-1 {
 	padding: 0.25rem;
 }
 .p-10 {
 	padding: 2.5rem;
-}
-.p-4 {
-	padding: 1rem;
 }
 .p-5 {
 	padding: 1.25rem;
