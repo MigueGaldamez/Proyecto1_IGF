@@ -2,7 +2,7 @@
     <app-layout title="Profile">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Profile
+                Perfil
             </h2>
         </template>
 
@@ -13,26 +13,30 @@
 
                     <jet-section-border />
                 </div>
+                 <div v-if="$page.props.jetstream.canUpdateProfileInformation">
+                    <actualizar-especialidad :user="$page.props.user" />
 
+                    <jet-section-border />
+                </div>
                 <div v-if="$page.props.jetstream.canUpdatePassword">
                     <update-password-form class="mt-10 sm:mt-0" />
 
                     <jet-section-border />
                 </div>
 
-                <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
+                <!--<div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
                     <two-factor-authentication-form class="mt-10 sm:mt-0" />
 
                     <jet-section-border />
-                </div>
+                </div>-->
 
                 <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
 
-                <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
+                <!--<template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
                     <jet-section-border />
 
                     <delete-user-form class="mt-10 sm:mt-0" />
-                </template>
+                </template>-->
             </div>
         </div>
     </app-layout>
@@ -47,7 +51,7 @@
     import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue'
     import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue'
     import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue'
-
+    import ActualizarEspecialidad from '@/Pages/Profile/Partials/ActualizarEspecialidad.vue'
     export default defineComponent({
         props: ['sessions'],
 
@@ -59,6 +63,7 @@
             TwoFactorAuthenticationForm,
             UpdatePasswordForm,
             UpdateProfileInformationForm,
+            ActualizarEspecialidad,
         },
     })
 </script>

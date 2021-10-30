@@ -5,7 +5,7 @@
         <jet-banner />
 
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-white border-b border-gray-100 sticky sticky-top">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -20,7 +20,7 @@
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    Inicio
                                 </jet-nav-link>
                             </div>
                              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -28,6 +28,64 @@
                                     Chat
                                 </jet-nav-link>
                             </div>
+
+                        
+                             
+                              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('solicitudes')" :active="route().current('solicitudes')">
+                                   Revisar Solicitud
+                                </jet-nav-link>
+                            </div>
+                              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('pagos')" :active="route().current('pagos')">
+                                    Ver pagos
+                                </jet-nav-link>
+                            </div>
+                           
+                          
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link :href="route('tarjeta.index')" :active="route().current('tarjeta.index')">
+                                   Tarjetas
+                                </jet-nav-link>
+                            </div>
+                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" :active="route().current('clientesver','cliente.index','tipoUsuario.index')">
+                                    Usuarios
+                                </jet-nav-link>
+                                <ul class="dropdown-menu">
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('clientesver')" >Editar Cliente</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('asesores')">Editar Especialista</jet-nav-link></li>
+                                
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('clientesver')" >Listado clientes</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('asesores')" >Listado especialistas</jet-nav-link></li>
+                                </ul>
+                             </div>
+                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" :active="route().current('especialidad.index','cliente.index','tipoUsuario.index')">
+                                    Administracion
+                                </jet-nav-link>
+                                <ul class="dropdown-menu">
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('especialidad.index')" >Especialidades</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('cliente.index')">Clientes</jet-nav-link></li>
+                                
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('tipoUsuario.index')" >Tipo de usuarios</jet-nav-link></li>
+                                </ul>
+                             </div>
+                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <jet-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" :active="route().current('consultas','cliente.index','tipoUsuario.index')">
+                                    Consultas
+                                </jet-nav-link>
+                                <ul class="dropdown-menu">
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultas')" >Ver Consultas</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultasrealizadas')">Consultas Cliente</jet-nav-link></li>
+                                
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('realizarconsulta')" >Realizar consulta</jet-nav-link></li>
+                                </ul>
+                             </div>
+                                
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -108,11 +166,11 @@
                                     <template #content>
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
+                                           Configurar Cuenta
                                         </div>
 
                                         <jet-dropdown-link :href="route('profile.show')">
-                                            Profile
+                                            Perfil
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
@@ -124,7 +182,7 @@
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
                                             <jet-dropdown-link as="button">
-                                                Log Out
+                                                Cerrar Sesión
                                             </jet-dropdown-link>
                                         </form>
                                     </template>
@@ -148,12 +206,37 @@
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                            Inicio
                         </jet-responsive-nav-link>
                     </div>
                     <div class="pt-2 pb-3 space-y-1">
                         <jet-responsive-nav-link :href="route('chat')" :active="route().current('chat')">
                            Chat
+                        </jet-responsive-nav-link>
+                    </div>
+                     <div class="pt-2 pb-3 space-y-1">
+                        <jet-responsive-nav-link :href="route('consultas')" :active="route().current('consultas')">
+                           Consultas
+                        </jet-responsive-nav-link>
+                    </div>
+                    <div class="pt-2 pb-3 space-y-1">
+                        <jet-responsive-nav-link :href="route('tipoUsuario.index')" :active="route().current('tipoUsuario.index')">
+                           Tipos de Usuarios
+                        </jet-responsive-nav-link>
+                    </div>
+                     <div class="pt-2 pb-3 space-y-1">
+                        <jet-responsive-nav-link :href="route('cliente.index')" :active="route().current('cliente.index')">
+                           Clientes
+                        </jet-responsive-nav-link>
+                    </div>
+                     <div class="pt-2 pb-3 space-y-1">
+                        <jet-responsive-nav-link :href="route('especialidad.index')" :active="route().current('especialidad.index')">
+                           Especialidades
+                        </jet-responsive-nav-link>
+                    </div>
+                    <div class="pt-2 pb-3 space-y-1">
+                        <jet-responsive-nav-link :href="route('tarjeta.index')" :active="route().current('tarjeta.index')">
+                             Tarjetas
                         </jet-responsive-nav-link>
                     </div>
 
@@ -172,7 +255,7 @@
 
                         <div class="mt-3 space-y-1">
                             <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                Profile
+                                Perfil
                             </jet-responsive-nav-link>
 
                             <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
@@ -182,7 +265,7 @@
                             <!-- Authentication -->
                             <form method="POST" @submit.prevent="logout">
                                 <jet-responsive-nav-link as="button">
-                                    Log Out
+                                    Cerrar Sesión
                                 </jet-responsive-nav-link>
                             </form>
 

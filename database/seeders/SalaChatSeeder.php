@@ -17,11 +17,11 @@ class SalaChatSeeder extends Seeder
     {
         //
 
-        DB::table('SalaChat')->insert([
+        DB::table('salaChat')->insert([
             'nombreSala'=>'General',
             
         ]);
-        DB::table('SalaChat')->insert([
+        DB::table('salaChat')->insert([
             'nombreSala'=>'SalaMatrimonio',
             
         ]);

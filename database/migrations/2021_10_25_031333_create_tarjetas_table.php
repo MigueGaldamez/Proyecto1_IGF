@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMensajeChatsTable extends Migration
+class CreateTarjetasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateMensajeChatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mensajeChat', function (Blueprint $table) {
+        Schema::create('tarjeta', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idSalaChat')->unsigned();
-            $table->foreign('idSalaChat')->references('id')->on('salaChat');
+            $table->string('codigo');
+            $table->string('pin');
+            $table->string('banco');
+            $table->date('fechaVencimiento');
+            $table->integer('estado');
+            $table->integer('tipo');   
             $table->unsignedBigInteger('idUsuario')->unsigned();
-            $table->foreign('idUsuario')->references('id')->on('users');
-            $table->mediumText('mensaje');
+            $table->foreign('idUsuario')->references('id')->on('users');         
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class CreateMensajeChatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mensajeChat');
+        Schema::dropIfExists('tarjeta');
     }
 }
