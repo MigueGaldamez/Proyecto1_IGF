@@ -22,6 +22,7 @@ class CreateEspecialistasTable extends Migration
             $table->string('reconocimiento');
             $table->string('tituloGraduado');
             $table->date('fechaInicio');
+            $table->integer('estado');
             $table->timestamps();
         });
     }

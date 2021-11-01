@@ -47,6 +47,7 @@ class EspecialistaController extends Controller
             'reconocimiento'=>$request->codigoProfesional,
             'tituloGraduado'=>$especialidad->nombre,
             'fechaInicio'=>date('Y-m-d'),
+            'estado'=>1,
         ]);    
        
     }
