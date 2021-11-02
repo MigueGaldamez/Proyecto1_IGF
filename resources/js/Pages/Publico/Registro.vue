@@ -87,9 +87,10 @@
                                                           <h6 class="text-light">Especialidad:</h6>
                                                             <select class="form-select" aria-label="Default select example">
                                                             <option selected>Especialidad</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                            <option value="1">Derecho del Trabajo</option>
+                                                            <option value="2">Derecho Administrativo</option>
+                                                            <option value="3">Derecho Procesal Pena</option>
+                                                            <option value="3">Derecho Civil y Mercantil</option>
                                                             </select>
                                                     </div>
                                                 </div>
