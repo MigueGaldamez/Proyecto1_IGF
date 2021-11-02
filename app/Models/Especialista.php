@@ -15,6 +15,7 @@ class Especialista extends Model
         'reconocimiento',
         'tituloGraduado',
         'fechaInicio',
+        'estado',
     ];
 
     public function usuario(){
