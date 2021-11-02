@@ -11,15 +11,15 @@ class Especialista extends Model
     protected $table = 'especialista';
     protected $fillable = [
         'idEspecialidad',
-        'idNombre',
-        'Correo',
-        'Contraseña',
-        'Confirmar Contraseña',
-        'Codigo Profesional',
+        'idUsuario',
+        'reconocimiento',
+        'tituloGraduado',
+        'fechainicio',
+        'estado',
     ];
 
     public function usuario(){
-        return $this->belongsTo (User::class,'idNombre','id');
+        return $this->belongsTo (User::class,'idUsuario','id');
     }
     public function especialidad(){
         return $this->belongsTo (Especialidad::class,'idEspecialidad','id');
