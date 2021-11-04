@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/asesores', function () {
     return Inertia::render('Especialistas/Inicio');
 })->name('asesores');
 */
+
 //API MIO------AQUI ESTA LA DIRECCION DE LA PAGINA
 Route::apiResource('/consultas', ConsultasController::class );
 //VISTA MIA

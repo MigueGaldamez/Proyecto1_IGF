@@ -13,14 +13,14 @@
                         <h3> Nuestros especialistas </h3>
                         <!-- listado de especialistas -->
                         <div class="row">
-                            <div v-for="especia in especialistas.data" :key="especia.id">
-                                <div class="col-md-4">
+                            <div v-for="especia in especialistas.data" :key="especia.id" class="col col-md-4 col-xl-4">
+                               
                                 <div class="card user-card">
                                 
                                     <div class="card-block">
                                     
                                         <h4 class="f-w-600 mt-2 m-b-10">{{especia.usuario.name}}</h4>
-                                        <p class="text-muted"><span class="badge bg-primary">Anti corrupción</span> | <span class="badge bg-warning text-dark">Derecho deportivo</span> | <span class="badge bg-info text-dark">Legislación médica</span></p>
+                                        <p class="text-muted"><span class="badge bg-primary">{{especia.especialidad.nombre}}</span></p>
                                         <hr>
                                         <p class="x m-t-15 mb-0">Nivel de actividad 60%</p>
                                         <ul class="list-unstyled activity-leval mt-0">
@@ -43,14 +43,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p class="m-t-15 text-muted"><button class="btn boton-principal text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">Realizar Consulta</button></p>
+                                        <p class="m-t-15 text-muted"><button class="btn boton-principal text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="abrirModal(especia);">Realizar Consulta</button></p>
                                         <hr>
                                     
                                     </div>
                                 </div>
                             </div>
                             
-                        </div>
+                        
                         </div>
                         <!-- fin especialistas -->
 
@@ -66,24 +66,24 @@
                                     <h5><b>Especialista seleccionado</b></h5>
                                     <div class="mb-3">
                                         <!-- <label for="nombre_asesor" class="form-label">Especialista</label> -->
-                                        <input type="text" class="form-control" id="nombre_asesor" value="Especialista1 Apellido1" disabled>
+                                        <input type="text" class="form-control" id="nombre_asesor"  disabled :value="especialista.name">
                                     </div>
 
                                     <br>
                                     <h5><b>Contenido de la consulta</b></h5>
                                     <div class="mb-3">
                                         <label for="titulo_consulta" class="form-label">Titulo</label>
-                                        <input type="text" class="form-control" id="titulo_consulta">
+                                        <input  v-model="consulta.titulo" type="text" class="form-control" id="titulo_consulta">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="consulta" class="form-label">Consulta</label>
-                                        <textarea class="form-control" id="consulta"/>
+                                        <textarea v-model="consulta.consulta"  class="form-control" id="consulta"/>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Enviar consulta</button>
+                                    <button type="button" class="btn btn-primary" @click="guardar();" data-bs-dismiss="modal">Enviar consulta</button>
                                 </div>
                                 </div>
                             </div>
@@ -110,17 +110,21 @@
            
         },data(){
             return{
+                consulta:{
+                    titulo:'',
+                    consulta:'',
+                    idEspecialista:'',
+                },
                 especialista:{
                     id:'0',
                     name:'',
                     email:'',
                     password:'',
                     especialidad:'',
-                    codigoProfesional:'',
+                    codigoProfesional:'',                
+                    idUsuario:'',
                 },
                 id:0,
-                modificar:true,
-                modal:0,
                 especialistas:[],
                 especialidades:[],
                 tituloModal:'',
@@ -143,44 +147,14 @@
                 this.especialidades = res2.data;
                 const res = await axios.get('/especialistas/',{params:this.pagination,});
                 this.especialistas = res.data;
-               
-                this.listarPaginas();
-
-            },
-            listarPaginas(){
-                const n = 2;
-                let arrayN=[];
-                let ini = this.pagination.page - 2;
-                if(ini<1){
-                    ini=1;
-                }
-                let fin = this.pagination.page + 2;
-                if(fin>this.especialistas.last_page){
-                    fin=this.especialistas.last_page;
-                }
-                for(let i=ini; i<=fin; i++){
-                    arrayN.push(i);
-                }
-                this.paginas=arrayN;    
-            },
-            async eliminar(id){
-                const res = await axios.delete('/especialistas/'+id);
-                this.cerrarModal();
-                this.listar();
-
             },
             async guardar(){
                 try{
 
-                    if(this.modificar){
-                        const res = await axios.put('/especialistas/'+this.id,this.especialista);
-                         console.log(res);         
-                    }
-                    else{
-                        const res = await axios.post('/especialistas/',this.especialista);
-                          console.log(res);
-                    }  
-                  
+                    //Aui nombre api
+                    const res = await axios.post('/consultas/',this.consulta);
+                    console.log(res);
+
                     this.cerrarModal();
                     this.listar();      
 
@@ -191,35 +165,19 @@
                 }
 
             },
-            abrirModal(data={}){
-                
-                if(this.modificar){
-                    this.id=data.id;
-                    this.especialista.id = data.id;
-                    this.especialista.name=data.usuario.name;
-                    this.especialista.email=data.usuario.email;
-                    this.especialista.especialidad=data.especialidad.id;
-                    this.especialista.password='';
-                    this.especialista.codigoProfesional=data.reconocimiento;
-                 
-                }
-                else{
-                    this.id=0;
-                     this.especialista.id = '';
-                    this.especialista.name='';
-                    this.especialista.email='';
-                    this.especialista.especialidad='';
-                    this.especialista.password='';
-                    this.especialista.codigoProfesional='';
-                }
+            abrirModal(data={}){       
+              
+                this.id=data.id;
+                this.especialista.id = data.id;
+                this.especialista.name=data.usuario.name;
+                this.especialista.email=data.usuario.email;
+                this.especialista.especialidad=data.especialidad.id; 
+                this.especialista.idUsuario=data.usuario.id;
+                this.consulta.idEspecialista = data.id;
             },
             cerrarModal(){
-                this.modal=0;
                 this.errores={};
             },
-        },
-        mounted() {
-            console.log('Component mounted.')
         },
         created(){
             this.listar();
