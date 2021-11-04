@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Consulta;
 use Illuminate\Http\Request;
 
 
@@ -54,7 +54,7 @@ class ConsultasController extends Controller
      */
     public function update(Request $request, Consulta $consulta)
     {
-        $universidad->update($request->all());
+        $consulta->update($request->all());
     }
 
     /**
