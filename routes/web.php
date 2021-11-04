@@ -10,6 +10,8 @@ use App\Http\Controllers\TipoUsuarioController;
 use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\TarjetaController;
 use App\Http\Controllers\EspecialistaController;
+use App\Http\Controllers\ConsultasController;
+
 
 Route::get('/', function () {
     return Inertia::render('Publico/Inicio', [
@@ -28,7 +30,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/chat', function () {
     return Inertia::render('Chat/contenedor');
 })->name('chat');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/consultas', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/consulta', function () {
     return Inertia::render('Consultas/Inicio');
 })->name('consultas');
 
@@ -40,9 +42,14 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/asesores', function () {
     return Inertia::render('Especialistas/Inicio');
 })->name('asesores');
 */
+//API MIO------AQUI ESTA LA DIRECCION DE LA PAGINA
+Route::apiResource('/consultas', ConsultasController::class );
+//VISTA MIA
 Route::middleware(['auth:sanctum', 'verified'])->get('/realizarconsulta', function () {
     return Inertia::render('Consultas/RealizarConsulta');
 })->name('realizarconsulta');
+
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/consultasrealizadas', function () {
     return Inertia::render('Consultas/ConsultasRealizadasCliente');
@@ -105,7 +112,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/tarjetas', function
     return Inertia::render('Tarjeta/Inicio');
 })->name('tarjeta.index');
 
+//API
 Route::apiResource('/especialistas', EspecialistaController::class);
+//VISTAS
 Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/especialistas', function () {
     return Inertia::render('Especialistas/Inicio');
 })->name('asesores');
+
+
