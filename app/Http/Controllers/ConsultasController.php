@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Consulta;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class ConsultasController extends Controller
 {
@@ -17,7 +17,7 @@ class ConsultasController extends Controller
     public function index(Request $request)
     {
         
-        $data = Consulta::paginate($request->per_page);
+        $data = Consulta::with('cliente')->paginate($request->per_page);
 
         return $data;
     }
@@ -31,7 +31,11 @@ class ConsultasController extends Controller
     public function store(Request $request)
     {
         $consulta=new Consulta();
-        $consulta->create($request->all());
+        $consulta->titulo = $request->titulo;
+        $consulta->consulta = $request->consulta;
+        $consulta->idEspecialista = $request->idEspecialista;
+        $consulta->idCliente = Auth::user()->id;
+        $consulta->save();
     }
 
     /**

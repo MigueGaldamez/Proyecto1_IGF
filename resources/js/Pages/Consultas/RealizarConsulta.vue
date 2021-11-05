@@ -112,6 +112,7 @@
                     titulo:'',
                     consulta:'',
                     idEspecialista:'',
+                
                 },
                 especialista:{
                     id:'0',
@@ -121,7 +122,7 @@
                     especialidad:'',
                     codigoProfesional:'',                
                     idUsuario:'',
-                },
+                }, 
                 id:0,
                 especialistas:[],
                 especialidades:[],
@@ -167,6 +168,7 @@
                 this.especialista.especialidad=data.especialidad.id; 
                 this.especialista.idUsuario=data.usuario.id;
                 this.consulta.idEspecialista = data.id;
+
             },
             cerrarModal(){
                 this.errores={};

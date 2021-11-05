@@ -13,7 +13,11 @@ class Consulta extends Model
     protected $table = 'consultas';
     protected $fillable = [
         'idEspecialista',
+        'idCliente',
         'titulo',
         'consulta',
     ];
+    public function cliente(){
+        return $this->belongsTo(User::class,'idCliente','id');
+    }
 }
