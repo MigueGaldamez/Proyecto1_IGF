@@ -1648,6 +1648,12 @@ select {
 .p-3 {
 	padding: 0.75rem;
 }
+.p-9 {
+	padding: 2.25rem;
+}
+.p-20 {
+	padding: 5rem;
+}
 .px-4 {
 	padding-left: 1rem;
 	padding-right: 1rem;
@@ -2336,6 +2342,11 @@ select {
 		padding-right: 5rem;
 	}
 
+	.sm\:px-9 {
+		padding-left: 2.25rem;
+		padding-right: 2.25rem;
+	}
+
 	.sm\:pt-0 {
 		padding-top: 0px;
 	}
@@ -2399,6 +2410,11 @@ select {
 	.lg\:px-8 {
 		padding-left: 2rem;
 		padding-right: 2rem;
+	}
+
+	.lg\:px-10 {
+		padding-left: 2.5rem;
+		padding-right: 2.5rem;
 	}
 }
 

@@ -81,7 +81,7 @@ class EspecialistaController extends Controller
         $especialistaE->idEspecialidad = $request->especialidad;
         $especialistaE->reconocimiento = $request->codigoProfesional;
         $especialistaE->save();
-        $especialistaE->estado=1;
+        $especialistaE->estado=$request->estado;
         $usuarioE->name = $request->name;
         $usuarioE->email = $request->email;
         $usuarioE->save();
@@ -107,6 +107,13 @@ class EspecialistaController extends Controller
         $especialistaE = Especialista::find($request->idUsuario);
         $usuarioE = User::find($especialistaE->idUsuario);
         $especialistaE->estado =2;
+        $especialistaE->save();
+    }
+    public function cambiarEstadono(Request $request){
+       
+        $especialistaE = Especialista::find($request->idUsuario);
+        $usuarioE = User::find($especialistaE->idUsuario);
+        $especialistaE->estado =3;
         $especialistaE->save();
     }
 }
