@@ -120,3 +120,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/especialistas', fun
 })->name('asesores');
 
 
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/solicitud/aceptar/',[EspecialistaController::class, 'cambiarEstado']);

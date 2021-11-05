@@ -99,6 +99,9 @@
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" :data-bs-target="'#eliminarModal_'+especia.id">
                                         Eliminar
                                     </button>
+                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" :data-bs-target="'#AceptarModal_'+especia.id">
+                                        Aceptar Solicitud
+                                    </button>
                                 </td>
                                     <!-- Modal Editar-->
                                     <div class="modal fade" :id="'editarModal_'+especia.id"  tabindex="-1" :aria-labelledby="'editarModalLabel_'+especia.id" aria-hidden="true">
@@ -158,6 +161,25 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                 <button type="button" class="btn btn-danger" @click="eliminar(especia.id);" data-bs-dismiss="modal">Si, Eliminar</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Fin Modal eliminar-->
+                                    <!-- Modal -->
+                                    <div class="modal fade" :id="'AceptarModal_'+especia.id"  tabindex="-1" :aria-labelledby="'AceptarModalLabel_'+especia.id" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" :id="'eliminarModalLabel_'+especia.id">Seguro que due desea eliminar este registro?</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Seguro que desea Aceptar la solicitud de <b>{{especia.usuario.name}}</b>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-success" @click="aceptar(especia.id);" data-bs-dismiss="modal">Si, Eliminar</button>
                                             </div>
                                             </div>
                                         </div>
@@ -257,6 +279,11 @@
                 this.cerrarModal();
                 this.listar();
 
+            },
+            async aceptar(id){
+                const res = await axios.post('/solicitud/aceptar/?idUsuario='+id);
+                this.cerrarModal();
+                this.listar();
             },
             async guardar(){
                 try{

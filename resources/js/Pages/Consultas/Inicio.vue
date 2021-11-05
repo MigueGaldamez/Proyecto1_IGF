@@ -87,6 +87,7 @@
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" :data-bs-target="'#eliminarModal_'+consul.id">
                                         Eliminar
                                     </button>
+                                      
                                 </td>
                                 <!-- Modal Editar-->
                                 <div class="modal fade" :id="'editarModal_'+consul.id"  tabindex="-1" :aria-labelledby="'editarModalLabel_'+consul.id" aria-hidden="true">

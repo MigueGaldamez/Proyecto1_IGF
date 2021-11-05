@@ -102,4 +102,11 @@ class EspecialistaController extends Controller
         $especialistaE->delete();
         $usuarioE->delete();
     }
+    public function cambiarEstado(Request $request){
+       
+        $especialistaE = Especialista::find($request->idUsuario);
+        $usuarioE = User::find($especialistaE->idUsuario);
+        $especialistaE->estado =2;
+        $especialistaE->save();
+    }
 }
