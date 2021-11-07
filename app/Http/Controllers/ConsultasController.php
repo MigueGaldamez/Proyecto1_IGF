@@ -54,7 +54,7 @@ class ConsultasController extends Controller
      */
     public function update(Request $request, Consulta $consulta)
     {
-        $universidad->update($request->all());
+        $consulta->update($request->all());
     }
 
     /**
