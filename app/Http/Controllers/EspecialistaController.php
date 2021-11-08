@@ -22,7 +22,12 @@ class EspecialistaController extends Controller
         $per_page=$request->per_page;
         return Especialista::with('usuario','especialidad')->paginate($per_page);
     }
-
+    public function soliciudesPe(Request $request)
+    {
+        //
+        $per_page=$request->per_page;
+        return Especialista::where('estado','=',1)->with('usuario','especialidad')->paginate($per_page);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -81,7 +86,7 @@ class EspecialistaController extends Controller
         $especialistaE->idEspecialidad = $request->especialidad;
         $especialistaE->reconocimiento = $request->codigoProfesional;
         $especialistaE->save();
-        $especialistaE->estado=1;
+        $especialistaE->estado=$request->estado;
         $usuarioE->name = $request->name;
         $usuarioE->email = $request->email;
         $usuarioE->save();
@@ -101,5 +106,19 @@ class EspecialistaController extends Controller
       
         $especialistaE->delete();
         $usuarioE->delete();
+    }
+    public function cambiarEstado(Request $request){
+       
+        $especialistaE = Especialista::find($request->idUsuario);
+        $usuarioE = User::find($especialistaE->idUsuario);
+        $especialistaE->estado =2;
+        $especialistaE->save();
+    }
+    public function cambiarEstadono(Request $request){
+       
+        $especialistaE = Especialista::find($request->idUsuario);
+        $usuarioE = User::find($especialistaE->idUsuario);
+        $especialistaE->estado =3;
+        $especialistaE->save();
     }
 }

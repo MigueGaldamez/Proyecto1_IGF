@@ -55,6 +55,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/realizarconsulta', functi
 Route::middleware(['auth:sanctum', 'verified'])->get('/consultasrealizadas', function () {
     return Inertia::render('Consultas/ConsultasRealizadasCliente');
 })->name('consultasrealizadas');
+Route::middleware(['auth:sanctum', 'verified'])->get('/consultaspendientes', function () {
+    return Inertia::render('Consultas/ConsultasEspecialista');
+})->name('consultaspendientes');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/pagos', function () {
     return Inertia::render('Especialistas/VerPagos');
@@ -121,3 +125,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/especialistas', fun
 })->name('asesores');
 
 
+Route::middleware(['auth:sanctum', 'verified'])->post('/solicitud/aceptar/',[EspecialistaController::class, 'cambiarEstado']);
+Route::middleware(['auth:sanctum', 'verified'])->post('/solicitud/rechazar/',[EspecialistaController::class, 'cambiarEstadono']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/solicitud/pendientes',[EspecialistaController::class, 'soliciudesPe']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/consultas/cliente/ver',[ConsultasController::class, 'consultasCliente']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/consultas/especialista/ver',[ConsultasController::class, 'consultasEspecialista']);
+Route::middleware(['auth:sanctum', 'verified'])->post('/consulta/precio',[ConsultasController::class, 'asignarPrecio']);
+Route::middleware(['auth:sanctum', 'verified'])->post('/sala/nueva',[ConsultasController::class, 'salaNueva']);

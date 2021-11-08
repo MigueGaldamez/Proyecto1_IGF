@@ -17,7 +17,7 @@ class Especialista extends Model
         'fechaInicio',
         'estado',
     ];
-
+    protected $with = ['usuario','especialidad'];
     public function usuario(){
         return $this->belongsTo (User::class,'idUsuario','id');
     }

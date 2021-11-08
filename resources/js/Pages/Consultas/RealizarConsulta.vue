@@ -100,8 +100,6 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout.vue'
-
-
     export default {
         components: {
             AppLayout,
@@ -114,6 +112,7 @@
                     titulo:'',
                     consulta:'',
                     idEspecialista:'',
+                
                 },
                 especialista:{
                     id:'0',
@@ -123,7 +122,7 @@
                     especialidad:'',
                     codigoProfesional:'',                
                     idUsuario:'',
-                },
+                }, 
                 id:0,
                 especialistas:[],
                 especialidades:[],
@@ -132,7 +131,6 @@
                 pagination:{
                     page:1,
                     per_page:5,
-
                 },
                 todo:{
                     page:1,
@@ -150,20 +148,16 @@
             },
             async guardar(){
                 try{
-
                     //Aui nombre api
                     const res = await axios.post('/consultas/',this.consulta);
                     console.log(res);
-
                     this.cerrarModal();
                     this.listar();      
-
                 }catch(error){
                     if(error.response.data){
                         this.errores = error.response.data.errors;
                     }
                 }
-
             },
             abrirModal(data={}){       
               
@@ -177,12 +171,20 @@
             },
             cerrarModal(){
                 this.errores={};
+                this.id=0;
+                this.especialista.id = 0;
+                this.especialista.name="";
+                this.especialista.email="";
+                this.especialista.especialidad=""; 
+                this.especialista.idUsuario=0;
+                this.consulta.idEspecialista = 0;
+                this.consulta.titulo="";
+                this.consulta.consulta="";
             },
         },
         created(){
             this.listar();
         }
-
         
     }
 </script>

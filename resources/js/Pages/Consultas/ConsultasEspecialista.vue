@@ -10,15 +10,15 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                    <div class="p-4">
-                      <h3> Mis Consultas realizadas </h3>
+                      <h3> Mis Consultas Recibidas </h3>
                    <table class="table table-striped table-sm">
                       
                         <thead class="table-dark">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Titulo</th>
-                                <th scope="col">Especialista</th>
-                                <th scope="col">Tipo</th>
+                                <th scope="col">Usuario</th>
+                                
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Acciones</th>
@@ -30,20 +30,24 @@
                               <tr v-for="consul in consultas.data" :key="consul.id">
                                 <th scope="row">{{consul.id}}</th>
                                 <td>{{consul.titulo}}</td>
-                                <td>{{consul.especialista.usuario.name}}</td>
-                                <td>{{consul.especialista.especialidad.nombre}}</td>
+                                <td>{{consul.cliente.name}}</td>
+                               
                                 <td>{{consul.created_at}}</td>
                                 <td v-if="consul.estado == 1">Sin Responder</td>
                                 <td v-if="consul.estado == 2">Aceptada</td>
                                 <td v-if="consul.estado == 3">Rechazada</td>
                                 <td v-if="consul.estado == 3">Finalizada</td>
                                 <td>   
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="abrirModal(consul);">
+                                    <button v-if="consul.estado == 1" type="button" class="btn btn-success btn-sm ms-2" data-bs-toggle="modal" :data-bs-target="'#aceptarModal'" @click="abrirModal(consul);">
+                                      Aceptar y asignar precio
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="abrirModal(consul);">
                                     Ver consulta
                                     </button>
-                                      <button type="button" class="btn btn-primary btn-sm ms-2">Abrir chat</button>
+                                      <button v-if="consul.estado != 1 && consul.sala_chat!=null" type="button" class="btn btn-success btn-sm ms-2">Abrir chat</button>
+                                      <button v-if="consul.estado != 1 && consul.sala_chat==null" type="button" class="btn btn-success btn-sm ms-2" @click="nuevaSala(consul.id);">Crear Sala Chat</button>
                                     <button type="button" class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" :data-bs-target="'#eliminarModal_'+consul.id">
-                                        Eliminar
+                                       Rechazar consulta
                                     </button>
                                       
                                 </td>
@@ -56,7 +60,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Seguro que desea eliminar el registro <b>{{consul.titulo}}</b>
+                                            Seguro que desea rechazar la consulta <b>{{consul.titulo}}</b> del usuario {{consul.cliente.name}}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -100,7 +104,34 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <!---->
+                         <div class="modal fade" id="aceptarModal" tabindex="-1" aria-labelledby="aceptarModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="aceptarModal">Aceptar consulta y Asignar Precio</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Usted esta a punto de aceptar la consulta con los siguientes detalles:<br>
+                                    <b>Titulo Consulta: </b> {{consulta.titulo}}<br>
+                                    <b>Usuario Consulta: </b>{{consulta.cliente}} <br>
+
+                                    <h3 class="mt-4"><span class="">Asignar precio</span></h3>
+                                    <div class="mb-3">
+                                        
+                                        <input v-model="aceptacion.precio" type="number" step="0.5" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <div id="emailHelp" class="form-text">a este precio se le sumara un 20% dirigido a la empresa.</div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" @click="guardarPrecio();">Asignar Precio</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---->
                         </div>
                 </div>
             </div>
@@ -120,12 +151,17 @@
         },
         data(){ 
             return{
-                 consulta:{
+                aceptacion:{
+                    precio:'',
+                    idConsulta:'',
+                },              
+                consulta:{
                     titulo:'',
                     consulta:'',
                     especialista:'',
                     especialidad:'',
                     fecha:'',
+                    cliente:'',
                 },
                 id:0,
                 modificar:true,
@@ -140,26 +176,36 @@
         }, 
         methods:{
             async listar(){
-                const res = await axios.get('/consultas/cliente/ver',{params:this.pagination,});
+                const res = await axios.get('/consultas/especialista/ver',{params:this.pagination,});
                 this.consultas = res.data;
             },
             abrirModal(data={}){
                 
-                if(this.modificar){
+              
                  
                     this.consulta.titulo=data.titulo;
                     this.consulta.consulta=data.consulta;
                     this.consulta.especialista = data.especialista.usuario.name;
                     this.consulta.especialidad = data.especialista.especialidad.nombre;
                     this.consulta.fecha = data.created_at;
-                }
-                else{
+                    this.consulta.cliente = data.cliente.name;
+                    this.aceptacion.idConsulta = data.id;
+                    /*
                      this.consulta.titulo='';
                     this.consulta.consulta='';
                     this.consulta.especialista =''; 
                     this.consulta.especialidad =''; 
                     this.consulta.fecha = '';
-                }
+                     this.consulta.cliente='';*/
+                
+            },
+            async guardarPrecio(){
+                const res = await axios.post('/consulta/precio/',this.aceptacion);      
+                this.listar();     
+            },
+            async nuevaSala(idConsulta){
+                const res = await axios.post('/sala/nueva?idSala='+idConsulta);      
+                this.listar();     
             },
             cerrarModal(){
                 this.modal=0;

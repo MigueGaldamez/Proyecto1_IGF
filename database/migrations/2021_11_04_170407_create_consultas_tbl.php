@@ -17,8 +17,14 @@ class CreateConsultasTbl extends Migration
             $table->id();
             $table->unsignedBigInteger('idEspecialista')->unsigned();
             $table->foreign('idEspecialista')->references('id')->on('especialista'); 
+            $table->unsignedBigInteger('idCliente')->unsigned();
+            $table->foreign('idCliente')->references('id')->on('users'); 
             $table->string('titulo');
             $table->text('consulta');
+            $table->decimal('precio',7,2)->nullable();
+            $table->unsignedInteger('estado');
+            $table->unsignedBigInteger('idSala')->unsigned()->nullable();
+            $table->foreign('idSala')->references('id')->on('salaChat'); 
             $table->timestamps();
         });
     }

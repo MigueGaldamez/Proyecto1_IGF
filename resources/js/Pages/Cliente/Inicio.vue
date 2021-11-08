@@ -62,7 +62,8 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nombre Cliente</th>
-                                <th scope="col">Correo</th>                            
+                                <th scope="col">Correo</th>              
+                                  <th scope="col">Fecha registro</th>              
                                 <th scope="col" colspan="2" class="text-center">Acciones</th>                           
                             </tr>
                         </thead>
@@ -71,6 +72,7 @@
                                 <th scope="row">{{cliente.id}}</th>
                                 <td>{{cliente.name}}</td>
                                 <td>{{cliente.email}}</td>
+                                 <td>{{cliente.created_at}}</td>
                                 <td>   
                                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" :data-bs-target="'#editarModal_'+cliente.id" @click="modificar=true; abrirModal(cliente);">
                                     Editar
