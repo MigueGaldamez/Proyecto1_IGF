@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consulta;
 use App\Models\Especialidad;
 use App\Models\Especialista;
+use App\Models\SalaChat;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Stmt\Return_;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 class EspecialistaController extends Controller
 {
     /**
@@ -121,4 +124,40 @@ class EspecialistaController extends Controller
         $especialistaE->estado =3;
         $especialistaE->save();
     }
+    public function obtenerEspecialista(Request $request){
+        $usuario = User::find(Auth::user()->id);
+        if($usuario->especialista){
+            return $usuario->especialista;
+        }else{
+            return 0;
+        }
+    }
+    public function editarPerfil(Request $request){
+        $usuario = User::find(Auth::user()->id);
+        $usuario->especialista->reconocimiento = $request->codigoProfesional;
+        $usuario->especialista->idEspecialidad = $request->especialidad;
+        $usuario->especialista->save();
+        return "exito";
+    }
+    public function chatAbrirPost(Request $request){
+        
+        $sala= Session::put('idSala',$request->idSala);
+        return $sala;
+    }
+    public function chatAbrirGet(){
+        $sala = Session::get('idSala');
+        $consulta = Consulta::find($sala);
+        if($consulta){
+            $salachat = SalaChat::find($consulta->idSala);
+            Session::forget('idSala');
+            return $salachat;
+        }else{
+            return 0;
+        }
+    }
+    public function obtenerUsuario(){
+        $usuario = User::find(Auth::user()->id);
+        return $usuario;
+    }
 }
+

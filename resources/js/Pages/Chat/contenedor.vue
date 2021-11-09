@@ -2,12 +2,22 @@
     <app-layout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-               <sala-chat-seleccion
+               <!--<sala-chat-seleccion
                
                v-if="salaActual.id"
                :salas="salasChat"
                :salaActual="salaActual"
-               v-on:salaChanged="setSala($event)"/>
+               v-on:salaChanged="setSala($event)"/>-->
+             
+               <div class="grid grid-cols-2">
+                    <div class="font-bold text-xl">
+                          {{salaActual.nombreSala}} Chat
+                    </div>
+                    <div>
+                        
+                    </div>
+
+                </div>
             </h2>
         </template>
 
@@ -16,22 +26,19 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg chat">
                     <div class="row">
                         <div class="col col-4 border-2 p-4">
+                           
                             Otras conversaciones
                             <ol class="list-group mx-auto">
-                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                  <li class="list-group-item d-flex justify-content-between align-items-start" v-for="sala in salasChat" :key="sala.id" @click="setSala(sala);">
+                                   
+                              
                                     <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Usuario</div>
+                                    <div class="fw-bold"> {{sala.nombreSala}}</div>
                                     Mensaje de otro usuario
                                     </div>
                                     <span class="badge bg-primary rounded-pill">14</span>
                                 </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-start">
-                                    <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Usuario</div>
-                                    Mensaje de otro usuario
-                                    </div>
-                                    <span class="badge bg-primary rounded-pill">14</span>
-                                </li>
+                               
                                
                             </ol>
                         </div>
@@ -95,6 +102,9 @@ import SalaChatSeleccion from './salaChatSeleccion.vue'
                 salasChat:[],
                 salaActual:[],
                 mensajes:[],
+                sala:{
+                    
+                }
             }
         },
         watch:{
@@ -142,10 +152,18 @@ import SalaChatSeleccion from './salaChatSeleccion.vue'
                 .catch(error=>{
                     console.log(error);
                 })
+            },
+            async obtenerSala(){
+                const res = await axios.get('/abrir/chat');
+                if(res.data!=0){
+                    this.setSala(res.data);
+                }
+                
             }
         },
         created(){
             this.getSalas();
+            this.obtenerSala();
         }
     }
 </script>

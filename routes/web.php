@@ -124,6 +124,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/especialistas', fun
     return Inertia::render('Especialistas/Inicio');
 })->name('asesores');
 
+Route::middleware(['auth:sanctum', 'verified'])->post('/abrir/chat/',[EspecialistaController::class, 'chatAbrirPost']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/abrir/chat/',[EspecialistaController::class, 'chatAbrirGet']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/obtener/usuario',[EspecialistaController::class, 'obtenerUsuario']);
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/solicitud/aceptar/',[EspecialistaController::class, 'cambiarEstado']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/solicitud/rechazar/',[EspecialistaController::class, 'cambiarEstadono']);
@@ -132,3 +135,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/consultas/cliente/ver',[C
 Route::middleware(['auth:sanctum', 'verified'])->get('/consultas/especialista/ver',[ConsultasController::class, 'consultasEspecialista']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/consulta/precio',[ConsultasController::class, 'asignarPrecio']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/sala/nueva',[ConsultasController::class, 'salaNueva']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/obtener/especialista',[EspecialistaController::class, 'obtenerEspecialista']);
+Route::middleware(['auth:sanctum', 'verified'])->post('/editar/perfil/especialista',[EspecialistaController::class, 'editarPerfil'])->name('editarPerfil');

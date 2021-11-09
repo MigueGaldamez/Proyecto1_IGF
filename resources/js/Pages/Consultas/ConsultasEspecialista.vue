@@ -38,13 +38,14 @@
                                 <td v-if="consul.estado == 3">Rechazada</td>
                                 <td v-if="consul.estado == 3">Finalizada</td>
                                 <td>   
+                                     <button type="button" class="btn btn-primary btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="abrirModal(consul);">
+                                    Ver consulta
+                                    </button>
                                     <button v-if="consul.estado == 1" type="button" class="btn btn-success btn-sm ms-2" data-bs-toggle="modal" :data-bs-target="'#aceptarModal'" @click="abrirModal(consul);">
                                       Aceptar y asignar precio
                                     </button>
-                                    <button type="button" class="btn btn-primary btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="abrirModal(consul);">
-                                    Ver consulta
-                                    </button>
-                                      <button v-if="consul.estado != 1 && consul.sala_chat!=null" type="button" class="btn btn-success btn-sm ms-2">Abrir chat</button>
+                                   
+                                      <a v-if="consul.estado != 1 && consul.sala_chat!=null"  class="btn btn-success btn-sm ms-2" @click="abrirChat(consul.id);" :href="route('chat')">Abrir chat</a>
                                       <button v-if="consul.estado != 1 && consul.sala_chat==null" type="button" class="btn btn-success btn-sm ms-2" @click="nuevaSala(consul.id);">Crear Sala Chat</button>
                                     <button type="button" class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" :data-bs-target="'#eliminarModal_'+consul.id">
                                        Rechazar consulta
@@ -180,27 +181,22 @@
                 this.consultas = res.data;
             },
             abrirModal(data={}){
-                
-              
-                 
-                    this.consulta.titulo=data.titulo;
-                    this.consulta.consulta=data.consulta;
-                    this.consulta.especialista = data.especialista.usuario.name;
-                    this.consulta.especialidad = data.especialista.especialidad.nombre;
-                    this.consulta.fecha = data.created_at;
-                    this.consulta.cliente = data.cliente.name;
-                    this.aceptacion.idConsulta = data.id;
-                    /*
-                     this.consulta.titulo='';
-                    this.consulta.consulta='';
-                    this.consulta.especialista =''; 
-                    this.consulta.especialidad =''; 
-                    this.consulta.fecha = '';
-                     this.consulta.cliente='';*/
-                
+        
+                this.consulta.titulo=data.titulo;
+                this.consulta.consulta=data.consulta;
+                this.consulta.especialista = data.especialista.usuario.name;
+                this.consulta.especialidad = data.especialista.especialidad.nombre;
+                this.consulta.fecha = data.created_at;
+                this.consulta.cliente = data.cliente.name;
+                this.aceptacion.idConsulta = data.id;
+            
             },
             async guardarPrecio(){
                 const res = await axios.post('/consulta/precio/',this.aceptacion);      
+                this.listar();     
+            },
+            async abrirChat(idConsulta){
+                const res = await axios.post('/abrir/chat?idSala='+idConsulta);      
                 this.listar();     
             },
             async nuevaSala(idConsulta){
@@ -211,7 +207,7 @@
                 this.modal=0;
                 this.errores={};
             },
-            async eliminar(id){
+            async eliminar(id){ 
                 const res = await axios.delete('/consultas/'+id);
                 this.cerrarModal();
                 this.listar();

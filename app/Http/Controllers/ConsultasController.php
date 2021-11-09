@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Consulta;
+use App\Models\Especialista;
+use App\Models\Participante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -47,6 +49,15 @@ class ConsultasController extends Controller
         $sala->save();
         $consulta->idSala = $sala->id;
         $consulta->save();
+        $participante = new Participante();
+        $participante->idPaticipante = $consulta->idCliente;
+        $participante->idSala = $sala->id;
+        $participante->save();
+        $participante = new Participante();
+        $especialista = Especialista::find($consulta->idEspecialista);
+        $participante->idPaticipante = $especialista->idUsuario;
+        $participante->idSala = $sala->id;
+        $participante->save();
         return "exito";
     }
 

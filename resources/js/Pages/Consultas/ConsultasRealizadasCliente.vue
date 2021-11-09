@@ -41,7 +41,7 @@
                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="abrirModal(consul);">
                                     Ver consulta
                                     </button>
-                                      <button type="button" class="btn btn-primary btn-sm ms-2">Abrir chat</button>
+                                      <a v-if="consul.estado != 1 && consul.sala_chat!=null" type="button" class="btn btn-primary btn-sm ms-2"  @click="abrirChat(consul.id);" :href="route('chat')">Abrir chat</a>
                                     <button type="button" class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" :data-bs-target="'#eliminarModal_'+consul.id">
                                         Eliminar
                                     </button>
@@ -160,6 +160,10 @@
                     this.consulta.especialidad =''; 
                     this.consulta.fecha = '';
                 }
+            },
+             async abrirChat(idConsulta){
+                const res = await axios.post('/abrir/chat?idSala='+idConsulta);      
+                this.listar();     
             },
             cerrarModal(){
                 this.modal=0;

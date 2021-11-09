@@ -1,5 +1,5 @@
 <template>
-    <jet-form-section @submitted="updateProfileInformation">
+    <jet-form-section v-if="  this.form.especialidad !=''">
         <template #title>
             Informacion de Especialidad
         </template>
@@ -11,27 +11,31 @@
         <template #form>
             
             <!-- Name -->
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Especialidad" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
-            </div>
+          
 
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="email" value="Codigo Profesional" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
-                <jet-input-error :message="form.errors.email" class="mt-2" />
+                <jet-input id="email" type="text" class="mt-1 block w-full" v-model="form.codigoProfesional" />
+             
             </div>
+            <div class="col-span-6 sm:col-span-4">
+              
+                <jet-label for="email" value="Especialidad" />
+                <select v-model="form.especialidad" id="especialidad" class="form-select" aria-label="Default select example">
+                    <option selected>Abre este menu</option>
+                    <option  v-for="esp in especialidades.data" :key="esp.id" :value="esp.id">{{esp.nombre}}</option>
+                
+                </select>
+            </div>
+            
         </template>
 
         <template #actions>
-            <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
-            </jet-action-message>
+            <span v-if="guardado">Guardado</span>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+            <jet-button @click="actualizar();">
+                Guardar
             </jet-button>
         </template>
     </jet-form-section>
@@ -62,63 +66,44 @@
 
         data() {
             return {
-                form: this.$inertia.form({
-                    _method: 'PUT',
-                    name: this.user.name,
-                    email: this.user.email,
-                    photo: null,
-                }),
-
+                guardado:false,
+                form:{
+                    codigoProfesional:'',
+                    especialidad:'',
+                },
+                todo:{
+                    page:1,
+                    per_page:50,
+                },
+                especialidades:[],
                 photoPreview: null,
             }
         },
 
         methods: {
-            updateProfileInformation() {
-                if (this.$refs.photo) {
-                    this.form.photo = this.$refs.photo.files[0]
+            async listar(){
+                const res2 = await axios.get('/especialidads/',{params:this.todo,});
+                this.especialidades = res2.data;
+                const res = await axios.get('/obtener/especialista');
+                console.log(res.data);
+                if(res.data!=0){
+                     this.form.especialidad = res.data.idEspecialidad;
+                     this.form.codigoProfesional = res.data.reconocimiento;
                 }
-
-                this.form.post(route('user-profile-information.update'), {
-                    errorBag: 'updateProfileInformation',
-                    preserveScroll: true,
-                    onSuccess: () => (this.clearPhotoFileInput()),
-                });
+               
+               
+            },
+            async actualizar() {
+                
+                const res = await axios.post('/editar/perfil/especialista',this.form);
+                this.guardado=true;
+             
             },
 
-            selectNewPhoto() {
-                this.$refs.photo.click();
-            },
-
-            updatePhotoPreview() {
-                const photo = this.$refs.photo.files[0];
-
-                if (! photo) return;
-
-                const reader = new FileReader();
-
-                reader.onload = (e) => {
-                    this.photoPreview = e.target.result;
-                };
-
-                reader.readAsDataURL(photo);
-            },
-
-            deletePhoto() {
-                this.$inertia.delete(route('current-user-photo.destroy'), {
-                    preserveScroll: true,
-                    onSuccess: () => {
-                        this.photoPreview = null;
-                        this.clearPhotoFileInput();
-                    },
-                });
-            },
-
-            clearPhotoFileInput() {
-                if (this.$refs.photo?.value) {
-                    this.$refs.photo.value = null;
-                }
-            },
+          
         },
+         created(){
+            this.listar();
+        }
     })
 </script>
