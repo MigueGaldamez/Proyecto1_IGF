@@ -148,7 +148,7 @@ class EspecialistaController extends Controller
         $sala = Session::get('idSala');
         $consulta = Consulta::find($sala);
         if($consulta){
-            $salachat = SalaChat::find($consulta->idSala);
+            $salachat = SalaChat::with('consulta')->find($consulta->idSala);
             Session::forget('idSala');
             return $salachat;
         }else{
@@ -156,7 +156,7 @@ class EspecialistaController extends Controller
         }
     }
     public function obtenerUsuario(){
-        $usuario = User::find(Auth::user()->id);
+        $usuario = User::with('tarjetas')->find(Auth::user()->id);
         return $usuario;
     }
 }

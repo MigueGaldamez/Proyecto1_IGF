@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 use App\Models\Consulta;
 use App\Models\Especialista;
+use App\Models\MensajeChat;
 use App\Models\Participante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\SalaChat;
-
+use App\Models\Tarjeta;
+use App\Models\Pago;
 class ConsultasController extends Controller
 {
     /**
@@ -58,6 +60,11 @@ class ConsultasController extends Controller
         $participante->idPaticipante = $especialista->idUsuario;
         $participante->idSala = $sala->id;
         $participante->save();
+        $mensaje =new MensajeChat();
+        $mensaje->idUsuario = $consulta->idCliente;
+        $mensaje->mensaje = $consulta->consulta;
+        $mensaje->idSalaChat = $sala->id;
+        $mensaje->save();
         return "exito";
     }
 
@@ -116,5 +123,19 @@ class ConsultasController extends Controller
     public function destroy(Consulta $consulta)
     {
         $consulta->delete();
+    }
+    public function pagarConsulta(Request $request){
+        $consulta = Consulta::find($request->idConsulta);
+        $tarjeta = Tarjeta::find($request->idTarjeta);
+        $especialista = Especialista::find($consulta->idEspecialista);
+        $pago = new Pago();
+        $pago->idConsulta=$request->idConsulta;
+        $pago->idTarjeta = $request->idTarjeta;
+        $pago->idCliente = $consulta->idCliente;
+        $pago->idEspecialista = $especialista->idUsuario;
+        $pago->save();
+        $consulta->estado = 4;
+        $consulta->save();
+        return $pago;
     }
 }

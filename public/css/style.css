@@ -75,7 +75,7 @@
     z-index: 2;
   }
   
-  input[type=radio] {
+  .tabs input[type=radio] {
     display: none;
   }
   
@@ -105,23 +105,23 @@
     color:#FFFFFF;
   }
   
-  input[type=radio]:checked + label {
+  .tabs input[type=radio]:checked + label {
     color: #FFFFFF;
   }
-  input[type=radio]:checked + label > .notification {
+  .tabs input[type=radio]:checked + label > .notification {
     background-color: #FFFFFF;
     color: #374151;
   }
   
-  input[id=radio-1]:checked ~ .glider {
+  .tabs input[id=radio-1]:checked ~ .glider {
     transform: translateX(0);
   }
   
-  input[id=radio-2]:checked ~ .glider {
+  .tabs input[id=radio-2]:checked ~ .glider {
     transform: translateX(100%);
   }
   
-  input[id=radio-3]:checked ~ .glider {
+  .tabs input[id=radio-3]:checked ~ .glider {
     transform: translateX(200%);
   }
   
@@ -412,52 +412,6 @@
   border-left: 1px solid #eaeaea
 }
 
-.people-list {
-  -moz-transition: .5s;
-  -o-transition: .5s;
-  -webkit-transition: .5s;
-  transition: .5s
-}
-
-.people-list .chat-list li {
-  padding: 10px 15px;
-  list-style: none;
-  border-radius: 3px
-}
-
-.people-list .chat-list li:hover {
-  background: #efefef;
-  cursor: pointer
-}
-
-.people-list .chat-list li.active {
-  background: #efefef
-}
-
-.people-list .chat-list li .name {
-  font-size: 15px
-}
-
-.people-list .chat-list img {
-  width: 45px;
-  border-radius: 50%
-}
-
-.people-list img {
-  float: left;
-  border-radius: 50%
-}
-
-.people-list .about {
-  float: left;
-  padding-left: 8px
-}
-
-.people-list .status {
-  color: #999;
-  font-size: 13px
-}
-
 .chat .chat-header {
   padding: 15px 20px;
   border-bottom: 2px solid #f4f7f6
@@ -508,8 +462,8 @@
 
 .chat .chat-history .message {
   color: #444;
-  padding: 18px 20px;
-  line-height: 26px;
+  padding: 14px 16px;
+  line-height: 22px;
   font-size: 16px;
   border-radius: 7px;
   display: inline-block;
@@ -531,7 +485,8 @@
 }
 
 .chat .chat-history .my-message {
-  background: #efefef
+  background: #212d40;
+  color: #fff;
 }
 
 .chat .chat-history .my-message:after {
@@ -543,18 +498,19 @@
   width: 0;
   position: absolute;
   pointer-events: none;
-  border-bottom-color: #efefef;
+  border-bottom-color: #212d40;
   border-width: 10px;
   margin-left: -10px
 }
 
 .chat .chat-history .other-message {
-  background: #e8f1f3;
-  text-align: right
+  background: #617073;
+  text-align: right;
+  color: #fff;
 }
 
 .chat .chat-history .other-message:after {
-  border-bottom-color: #e8f1f3;
+  border-bottom-color: #617073;
   left: 93%
 }
 
@@ -633,4 +589,8 @@
 
 .modal-active{
 	display:block;
+}
+.colorHeader{
+	background-color: #212d40;
+	color:#fff;
 }

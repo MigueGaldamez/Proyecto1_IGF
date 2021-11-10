@@ -33,10 +33,13 @@
                                 <td>{{consul.cliente.name}}</td>
                                
                                 <td>{{consul.created_at}}</td>
-                                <td v-if="consul.estado == 1">Sin Responder</td>
-                                <td v-if="consul.estado == 2">Aceptada</td>
-                                <td v-if="consul.estado == 3">Rechazada</td>
-                                <td v-if="consul.estado == 3">Finalizada</td>
+                                <td v-if="consul.estado == 1"><span class="badge bg-info badge-pill">Sin Responder</span></td>
+                                <td v-if="consul.estado == 2 "><span class="badge bg-info badge-pill">Aceptada Esperando respuesta cliente</span></td>
+                                <td v-if="consul.estado == 3"><span class="badge bg-info badge-pill">Rechazada</span></td>
+                                <td v-if="consul.estado == 4"><span class="badge bg-info badge-pill">Aceptada y en marcha</span></td>
+                                <td v-if="consul.estado == 5"><span class="badge bg-info badge-pill">Finalizada por el Cliente</span></td>
+                                <td v-if="consul.estado == 6"><span class="badge bg-info badge-pill">Finalizada por Especialista</span></td>
+                                <td v-if="consul.estado == 7"><span class="badge bg-info badge-pill">Cerrada</span></td>
                                 <td>   
                                      <button type="button" class="btn btn-primary btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="abrirModal(consul);">
                                     Ver consulta
@@ -46,9 +49,9 @@
                                     </button>
                                    
                                       <a v-if="consul.estado != 1 && consul.sala_chat!=null"  class="btn btn-success btn-sm ms-2" @click="abrirChat(consul.id);" :href="route('chat')">Abrir chat</a>
-                                      <button v-if="consul.estado != 1 && consul.sala_chat==null" type="button" class="btn btn-success btn-sm ms-2" @click="nuevaSala(consul.id);">Crear Sala Chat</button>
-                                    <button type="button" class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" :data-bs-target="'#eliminarModal_'+consul.id">
-                                       Rechazar consulta
+                                      <button v-if="consul.estado >= 4 && consul.sala_chat==null" type="button" class="btn btn-success btn-sm ms-2" @click="nuevaSala(consul.id);">Crear Sala Chat</button>
+                                    <button v-if="consul.estado == 1" type="button" class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" :data-bs-target="'#eliminarModal_'+consul.id">
+                                       Rechazar 
                                     </button>
                                       
                                 </td>

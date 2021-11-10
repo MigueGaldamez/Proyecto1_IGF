@@ -1,6 +1,6 @@
 <template>
-    <div class="h-95 w-full">
-        <div class="h-full p-2 flex-col-reverse overflow-scroll chat-history">
+    <div class="w-full overflow-scroll" style="max-height:55vh;">
+        <div class="h-full p-2 flex-col-reverse chat-history">
             <div v-for="(mensaje, index) in mensajes" :key="index">
                 <mensaje-item :mensaje="mensaje"/>
             </div>

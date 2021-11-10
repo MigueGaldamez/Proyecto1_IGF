@@ -14,7 +14,7 @@ class ChatController extends Controller
     //
     public function salas(Request $request){
         $salas = Participante::where('idPaticipante','=',Auth::user()->id)->pluck('idSala');
-        return SalaChat::whereIn('id',$salas)->get();
+        return SalaChat::whereIn('id',$salas)->with('consulta')->get();
     }
     public function mensajes(Request $request, $salaId){
         return MensajeChat::where('idSalaChat',$salaId)->with('usuario')

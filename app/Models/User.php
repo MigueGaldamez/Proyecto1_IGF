@@ -67,4 +67,7 @@ class User extends Authenticatable
     public function especialista(){
         return $this->hasOne(Especialista::class,'idUsuario','id');
     }
+    public function tarjetas(){
+        return $this->hasMany(Tarjeta::class,'idUsuario','id')->where('estado','=',1);
+    }
 }

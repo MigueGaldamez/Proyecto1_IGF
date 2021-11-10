@@ -1,14 +1,13 @@
 <template>
     <app-layout title="Dashboard">
-        <template #header>
+        <!--<template #header class="sticky position-sticky sticky-top">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-               <!--<sala-chat-seleccion
+               sala-chat-seleccion
                
                v-if="salaActual.id"
                :salas="salasChat"
                :salaActual="salaActual"
-               v-on:salaChanged="setSala($event)"/>-->
-             
+               v-on:salaChanged="setSala($event)"/>
                <div class="grid grid-cols-2">
                     <div class="font-bold text-xl">
                           {{salaActual.nombreSala}} Chat
@@ -19,11 +18,11 @@
 
                 </div>
             </h2>
-        </template>
+        </template>-->
 
         <div class="py-8">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg chat">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg chat" >
                     <div class="row">
                         <div class="col col-4 border-2 p-4">
                            
@@ -42,10 +41,10 @@
                                
                             </ol>
                         </div>
-                         <div class="col col-8">
-                            <div class="bg-gray-100 w-100  text-center">
-                                <h3 class="text-center mt-3">{{salaActual.nombreSala}}</h3>
-                                <button type="button" class="btn btn-outline-danger btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                         <div class="col col-8 px-0">
+                            <div class="chat-header colorHeader text-center">
+                                <h3 class="text-center">{{salaActual.nombreSala}}</h3>
+                                <button v-if="salaActual.consulta.estado!=6"  type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 Finaliza consulta
                                 </button>
 
