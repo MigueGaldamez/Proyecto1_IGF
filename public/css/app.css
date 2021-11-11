@@ -1162,31 +1162,21 @@ select {
 .float-left {
 	float: left;
 }
-.m-1 {
-	margin: 0.25rem;
-}
-.m-2 {
-	margin: 0.5rem;
-}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
-}
-.my-4 {
-	margin-top: 1rem;
-	margin-bottom: 1rem;
 }
 .mx-2 {
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
 }
-.mx-4 {
-	margin-left: 1rem;
-	margin-right: 1rem;
-}
 .my-2 {
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
+}
+.my-4 {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 }
 .ml-3 {
 	margin-left: 0.75rem;
@@ -1664,11 +1654,11 @@ select {
 .p-10 {
 	padding: 2.5rem;
 }
-.p-5 {
-	padding: 1.25rem;
-}
 .p-3 {
 	padding: 0.75rem;
+}
+.p-5 {
+	padding: 1.25rem;
 }
 .px-4 {
 	padding-left: 1rem;

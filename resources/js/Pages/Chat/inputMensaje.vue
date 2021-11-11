@@ -1,6 +1,6 @@
 <template>
     <div class="realtive h-20 mx-2 my-2" style="border-top:1px solid #e6e6e6;">
-        <div v-if="sala.consulta.estado!=6"  class="grid grid-cols-6">
+        <div v-if="sala.consulta.estado!=7"  class="grid grid-cols-6">
             <input type="text" v-model="mensaje" @keyup.enter="enviarMensaje()" placeholder="Escribe algo" class="col-span-5 outline-none p-1"/>
             <button 
                 @click="enviarMensaje()" 
@@ -17,7 +17,7 @@
 
 
 
-        <div v-if="sala.consulta.estado==6">
+        <div v-if="sala.consulta.estado==7">
             <div class="alert alert-warning d-flex align-items-center" role="alert">
                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                 <div>

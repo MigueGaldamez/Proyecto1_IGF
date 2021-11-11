@@ -33,9 +33,16 @@
                               
                                     <div class="ms-2 me-auto">
                                     <div class="fw-bold"> {{sala.nombreSala}}</div>
-                                    Mensaje de otro usuario
+                                
+                                        <div v-for="(mensaje,index) in sala.ultimo_mensaje" :key="mensaje.id">
+                                           
+                                            <span v-if="index==sala.ultimo_mensaje.length-1">
+                                                <span v-if="usuario.idUsuario==mensaje.idUsuario">Tú: </span>
+                                                {{mensaje.mensaje}}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <span class="badge bg-primary rounded-pill">14</span>
+                                    <span class="badge bg-primary rounded-pill">{{sala.ultimo_mensaje.length}}</span>
                                 </li>
                                
                                
@@ -44,7 +51,9 @@
                          <div class="col col-8 px-0">
                             <div class="chat-header colorHeader text-center">
                                 <h3 class="text-center">{{salaActual.nombreSala}}</h3>
-                                <button v-if="salaActual.consulta.estado!=6"  type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <small v-if="salaActual.consulta.estado==5">Cliente solicitó finalizar la consulta</small>
+                                <small v-if="salaActual.consulta.estado==6">Especialista solicitó finalizar la consulta</small><br>
+                                <button v-if="salaActual.consulta.estado!=7"  type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 Finaliza consulta
                                 </button>
 
@@ -62,12 +71,12 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-danger">Si, terminar</button>
+                                        <button type="button" class="btn btn-danger" @click="terminarConver(salaActual.consulta.id);" data-bs-dismiss="modal">Si, terminar</button>
                                     </div>
                                     </div>
                                 </div>
                                 </div>
-                             <contenedor-mensaje :mensajes="mensajes"/>
+                             <contenedor-mensaje :mensajes="mensajes" :usuario="usuario.idUsuario"/>
                             <input-mensaje 
                             :sala="salaActual"
                             v-on:mensajeEnviado="getMensajes()"/>
@@ -103,6 +112,9 @@ import SalaChatSeleccion from './salaChatSeleccion.vue'
                 mensajes:[],
                 sala:{
                     
+                }, 
+                usuario:{
+                    idUsuario:''
                 }
             }
         },
@@ -116,6 +128,12 @@ import SalaChatSeleccion from './salaChatSeleccion.vue'
             }
         },
         methods:{
+            listar(){
+                axios.get('/obtener/usuario').then(res => {
+                    this.usuario.idUsuario = res.data.id;
+                    console.log(this.usuario.idUsuario)
+                });  
+            },
             conectar(){
                 if(this.salaActual.id){
                     let vm = this;
@@ -151,6 +169,7 @@ import SalaChatSeleccion from './salaChatSeleccion.vue'
                 .catch(error=>{
                     console.log(error);
                 })
+                console.log(this.salaActual.ultimo_mensaje[this.salaActual.ultimo_mensaje.length-1].id);
             },
             async obtenerSala(){
                 const res = await axios.get('/abrir/chat');
@@ -158,11 +177,20 @@ import SalaChatSeleccion from './salaChatSeleccion.vue'
                     this.setSala(res.data);
                 }
                 
-            }
+            },
+              
+            async terminarConver(idConsulta){
+                const res = await axios.post('/terminar/consulta?idSala='+idConsulta);      
+                this.getSalas();
+                this.obtenerSala();  
+                this.listar();  
+                
+            },
         },
         created(){
             this.getSalas();
             this.obtenerSala();
+            this.listar();
         }
     }
 </script>

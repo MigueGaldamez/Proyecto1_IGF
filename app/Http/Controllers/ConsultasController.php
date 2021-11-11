@@ -138,4 +138,27 @@ class ConsultasController extends Controller
         $consulta->save();
         return $pago;
     }
+    public function terminarConsulta(Request $request){
+        $consulta = Consulta::find($request->idSala);
+        $usuario = User::find(Auth::user()->id);
+        if($consulta->idCliente==$usuario->id){
+            if( $consulta->estado==6){
+                $consulta->estado=7;
+                $consulta->save();
+            }else{
+                $consulta->estado=5;
+                $consulta->save();
+            }
+        }else
+        if($consulta->idEspecialista==$usuario->especialista->id){
+            if( $consulta->estado==5){
+                $consulta->estado=7;
+                $consulta->save();
+            }else{
+                $consulta->estado=6;
+                $consulta->save();
+            }
+        }
+        return $consulta;
+    }
 }

@@ -157,7 +157,11 @@ class EspecialistaController extends Controller
     }
     public function obtenerUsuario(){
         $usuario = User::with('tarjetas')->find(Auth::user()->id);
-        return $usuario;
+        if($usuario->especialista){
+            return  $usuario = User::with('tarjetas','especialista')->find(Auth::user()->id);
+        }else{
+            return $usuario = User::with('tarjetas')->find(Auth::user()->id);
+        }  
     }
 }
 

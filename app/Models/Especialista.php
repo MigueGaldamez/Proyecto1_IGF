@@ -24,4 +24,7 @@ class Especialista extends Model
     public function especialidad(){
         return $this->belongsTo (Especialidad::class,'idEspecialidad','id');
     }
+    public function pagos(){
+        return $this->hasMany (Pago::class,'idEspecialista','idUsuario');
+    }
 }

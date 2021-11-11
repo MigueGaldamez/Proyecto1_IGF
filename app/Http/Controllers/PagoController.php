@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pago;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 class PagoController extends Controller
 {
     /**
@@ -60,5 +61,54 @@ class PagoController extends Controller
     public function destroy(Pago $pago)
     {
         //
+    }
+    public function verPagos(Request $request){
+       
+        $usuario = User::find(Auth::user()->id);
+        if($usuario->especialista){
+            if($request->mes!=0 || $request->anio!=0){
+                if($request->mes!=0 && $request->anio!=0){
+                    $fechaQ = $request->anio.'-'.$request->mes.'-1';
+                    $pagos = Pago::where('idEspecialista','=',$usuario->id)->whereBetween('created_at',[
+                        date('Y-m-01', strtotime($fechaQ)),
+                        date('Y-m-t', strtotime($fechaQ))
+                        ])->get();
+                    return  $pagos;
+                }else if($request->anio!=0){
+                    $fechaQ = $request->anio.'-01-01';
+                    $pagos = Pago::where('idEspecialista','=',$usuario->id)->whereBetween('created_at',[
+                        date('Y-01-01', strtotime($fechaQ)),
+                        date('Y-12-t', strtotime($fechaQ))
+                        ])->get();
+                    return $pagos;
+                }
+            }
+            else{
+                $pagos = Pago::where('idEspecialista','=',$usuario->id)->get();
+                return  $pagos;
+            }         
+        }else{
+            if($request->mes!=0 || $request->anio!=0){
+                if($request->mes!=0 && $request->anio!=0){
+                    $fechaQ = $request->anio.'-'.$request->mes.'-1';
+                    $pagos = Pago::where('idCliente','=',$usuario->id)->whereBetween('created_at',[
+                        date('Y-m-01', strtotime($fechaQ)),
+                        date('Y-m-t', strtotime($fechaQ))
+                        ])->get();
+                    return  $pagos;
+                }else if($request->anio!=0){
+                    $fechaQ = $request->anio.'-01-01';
+                    $pagos = Pago::where('idCliente','=',$usuario->id)->whereBetween('created_at',[
+                        date('Y-01-01', strtotime($fechaQ)),
+                        date('Y-12-t', strtotime($fechaQ))
+                        ])->get();
+                    return $pagos;
+                }
+            }
+            else{
+                $pagos = Pago::where('idCliente','=',$usuario->id)->get();
+                return  $pagos;
+            }
+        } 
     }
 }

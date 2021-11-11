@@ -11,7 +11,7 @@ use App\Http\Controllers\EspecialidadController;
 use App\Http\Controllers\TarjetaController;
 use App\Http\Controllers\EspecialistaController;
 use App\Http\Controllers\ConsultasController;
-
+use App\Http\Controllers\PagoController;
 
 Route::get('/', function () {
     return Inertia::render('Publico/Inicio', [
@@ -124,7 +124,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/especialistas', fun
     return Inertia::render('Especialistas/Inicio');
 })->name('asesores');
 
+Route::middleware(['auth:sanctum', 'verified'])->post('/terminar/consulta',[ConsultasController::class, 'terminarConsulta']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/pagar/consulta',[ConsultasController::class, 'pagarConsulta']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/pagos/ver',[PagoController::class, 'verPagos']);
 Route::middleware(['auth:sanctum', 'verified'])->post('/abrir/chat/',[EspecialistaController::class, 'chatAbrirPost']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/abrir/chat/',[EspecialistaController::class, 'chatAbrirGet']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/obtener/usuario',[EspecialistaController::class, 'obtenerUsuario']);
