@@ -630,3 +630,7 @@
       overflow-x: auto
   }
 }
+
+.modal-active{
+	display:block;
+}

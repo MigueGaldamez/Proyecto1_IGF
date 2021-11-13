@@ -95,7 +95,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/clientes', function
     return Inertia::render('Cliente/Inicio');
 })->name('cliente.index');
 
-Route::middleware(['auth:sanctum', 'verified'])->apiResource('/especialidads', EspecialidadController::class);
+Route::apiResource('/especialidads', EspecialidadController::class);
 Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/especialidades', function () {
     return Inertia::render('Especialidad/Inicio');
 })->name('especialidad.index');
@@ -105,7 +105,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/tarjetas', function
     return Inertia::render('Tarjeta/Inicio');
 })->name('tarjeta.index');
 
-Route::middleware(['auth:sanctum', 'verified'])->apiResource('/especialistas', EspecialistaController::class);
+Route::apiResource('/especialistas', EspecialistaController::class);
 Route::middleware(['auth:sanctum', 'verified'])->get('/cruds/especialistas', function () {
     return Inertia::render('Especialistas/Inicio');
 })->name('asesores');

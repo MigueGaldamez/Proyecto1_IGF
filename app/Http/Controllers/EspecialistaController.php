@@ -46,6 +46,7 @@ class EspecialistaController extends Controller
             'idEspecialidad'=>$request->especialidad,
             'reconocimiento'=>$request->codigoProfesional,
             'tituloGraduado'=>$especialidad->nombre,
+            'estado'=>1,
             'fechaInicio'=>date('Y-m-d'),
             'estado'=>1,
         ]);    
@@ -80,6 +81,7 @@ class EspecialistaController extends Controller
         $especialistaE->idEspecialidad = $request->especialidad;
         $especialistaE->reconocimiento = $request->codigoProfesional;
         $especialistaE->save();
+        $especialistaE->estado=1;
         $usuarioE->name = $request->name;
         $usuarioE->email = $request->email;
         $usuarioE->save();
