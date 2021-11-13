@@ -54,24 +54,27 @@
                                     <div class="contact-wrap w-100 p-md-5 p-4 py-5">
                                          <h2 class=" text-light">Registrarse <br> <b>Especialista</b></h2> 
                                         <span class="mb-4 text-light">Sabes de leyes y te gustaria responder consultas</span>
-                                        <form method="POST" id="contactForm" name="contactForm" class="contactForm" novalidate="novalidate">
+                                        <div id="contactForm" name="contactForm" class="contactForm">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                          <h6 class="text-light">Nombre:</h6>
-                                                        <input type="text" class="form-control" name="name2" id="name2" placeholder="Nombre">
+                                                        <h6 class="text-light">Nombre:</h6>
+                                                        <input v-model="especialista.name" type="text" class="form-control" name="name2" id="name2" placeholder="Nombre">                   
+                                                        <span class="text-danger" v-if="errores.name">{{errores.name[0]}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                          <h6 class="text-light">Correo:</h6>
-                                                        <input type="email" class="form-control" name="email2" id="email2" placeholder="Email">
+                                                        <h6 class="text-light">Correo:</h6>
+                                                        <input v-model="especialista.email" type="email" class="form-control" name="email2" id="email2" placeholder="Correo">                                                     
+                                                        <span class="text-danger" v-if="errores.email">{{errores.email[0]}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                         <h6 class="text-light">Contraseña:</h6>
-                                                        <input type="password" class="form-control" name="subject" id="subject" placeholder="Contraseña">
+                                                        <h6 class="text-light">Contraseña:</h6>
+                                                        <input v-model="especialista.password" type="password" class="form-control" name="subject" id="subject" placeholder="Contraseña">                                                        
+                                                        <span class="text-danger" v-if="errores.password">{{errores.password[0]}}</span>
                                                     </div>
                                                 </div>
                                                   <div class="col-md-6">
@@ -85,35 +88,59 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                           <h6 class="text-light">Especialidad:</h6>
-                                                            <select class="form-select" aria-label="Default select example">
-                                                            <option selected>Especialidad</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                          
+                                                            <select v-model="especialista.especialidad" id="especialidad" class="form-select"   placeholder="Especialidad" aria-label="Default select example">
+                                                            
+                                                                <option  v-for="esp in especialidades.data" :key="esp.id" :value="esp.id">{{esp.nombre}}</option>
+                                                            
                                                             </select>
+                                                            <span class="text-danger" v-if="errores.especialidad">{{errores.especialidad[0]}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                           <h6 class="text-light">Codigo Profesional:</h6>
-                                                        <input type="email" class="form-control" name="email3" id="email3" placeholder="Codigo Profesional">
+                                                        <input  v-model="especialista.codigoProfesional" type="text" class="form-control" placeholder="Codigo Profesional" id="codigoProfesional">
+                                                        
+                                                        <span class="text-danger" v-if="errores.codigoProfesional">{{errores.codigoProfesional[0]}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 mt-2">
                                                     <div class="form-group">
-                                                        <button class="btn btn-warning text-white">Enviar</button>
+                                                        <button class="btn btn-warning text-white" @click="guardar();">Enviar</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                                 <!--Aqui-->
                             </div>
                        
-                   
-                </div>
-                   
+                        <!-- Modal -->
+                        <div class="modal" data-bs-backdrop="static" data-bs-keyboard="false" v-bind:class="{mostrar:showModal}">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Exito</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                   Se ha registrado satisfactoriamente, en 24 horas o menos tendra una respuesta.
+
+                                </div>
+                                <div class="modal-footer">
+                                
+                                   <a  :href="route('inicio')" class="btn btn-dark">Entendido</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--FinModal-->
+                    </div>
+                           
                 </div>
             </div>
         </div>
@@ -131,6 +158,18 @@
         },
           data() {
             return {
+                showModal:false,
+                especialista:{
+                    id:'0',
+                    name:'',
+                    email:'',
+                    password:'',
+                    especialidad:'',
+                    codigoProfesional:'',
+                },
+                errores:{},
+               
+                especialidades:[],
                 form: this.$inertia.form({
                     name: '',
                     email: '',
@@ -146,7 +185,39 @@
                 this.form.post(this.route('register'), {
                     onFinish: () => this.form.reset('password', 'password_confirmation'),
                 })
+            },
+             async listar(){
+                const res = await axios.get('/especialidads/',{params:this.todo,});
+                this.especialidades = res.data;
+            },
+            async guardar(){
+               try{
+                    const res = await axios.post('/especialistas/',this.especialista);
+                    if(res){
+                       
+                        
+                         this.showModal=true;
+                       
+                    }                     
+                }catch(error){
+                    if(error.response.data){
+                        this.errores = error.response.data.errors;
+                    }
+                }
+                
             }
+           
+        },
+         created(){
+            this.listar();
+          
         }
     })
 </script>
+<style>
+.mostrar{
+    display:list-item !important;
+    opacity: 1;
+    background-color: rgba(0,0,0,0.6);
+}
+</style>

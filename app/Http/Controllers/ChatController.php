@@ -7,11 +7,14 @@ use App\Models\SalaChat;
 use App\Models\MensajeChat;
 use Illuminate\Support\Facades\Auth;
 use App\Events\NuevoChatMensaje;
+use App\Models\Participante;
+
 class ChatController extends Controller
 {
     //
     public function salas(Request $request){
-        return SalaChat::all();
+        $salas = Participante::where('idPaticipante','=',Auth::user()->id)->pluck('idSala');
+        return SalaChat::whereIn('id',$salas)->with('consulta')->get();
     }
     public function mensajes(Request $request, $salaId){
         return MensajeChat::where('idSalaChat',$salaId)->with('usuario')

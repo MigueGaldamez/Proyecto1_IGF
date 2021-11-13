@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
+use Carbon\Carbon;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -59,4 +59,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+   
+    public function getCreatedAtAttribute($value)
+    {
+        return carbon::parse($value)->format('D d-m-Y');
+    }
+    public function especialista(){
+        return $this->hasOne(Especialista::class,'idUsuario','id');
+    }
+    public function tarjetas(){
+        return $this->hasMany(Tarjeta::class,'idUsuario','id')->where('estado','=',1);
+    }
 }
