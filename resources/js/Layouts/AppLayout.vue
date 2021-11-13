@@ -80,6 +80,8 @@
                                 <ul class="dropdown-menu">
                                     <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultas')" >Ver Consultas</jet-nav-link></li>
                                     <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultasrealizadas')">Consultas Cliente</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultaspendientes')">Consultas Especialista</jet-nav-link></li>
+                                    
                                 
                                     <li><hr class="dropdown-divider"></li>
                                     <li ><jet-nav-link class="dropdown-item  px-3" :href="route('realizarconsulta')" >Realizar consulta</jet-nav-link></li>

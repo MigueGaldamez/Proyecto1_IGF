@@ -1159,12 +1159,20 @@ select {
 .float-right {
 	float: right;
 }
-.m-1 {
-	margin: 0.25rem;
+.float-left {
+	float: left;
 }
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
+}
+.mx-2 {
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+.my-2 {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 .my-4 {
 	margin-top: 1rem;
@@ -1604,6 +1612,10 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
 }
+.bg-blue-500 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(59, 130, 246, var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
 }
@@ -1635,11 +1647,11 @@ select {
 .p-10 {
 	padding: 2.5rem;
 }
-.p-5 {
-	padding: 1.25rem;
-}
 .p-3 {
 	padding: 0.75rem;
+}
+.p-5 {
+	padding: 1.25rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1696,6 +1708,10 @@ select {
 .py-10 {
 	padding-top: 2.5rem;
 	padding-bottom: 2.5rem;
+}
+.px-0 {
+	padding-left: 0px;
+	padding-right: 0px;
 }
 .pt-6 {
 	padding-top: 1.5rem;
