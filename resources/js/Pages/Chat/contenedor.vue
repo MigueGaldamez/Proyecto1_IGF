@@ -50,10 +50,10 @@
                         </div>
                          <div class="col col-8 px-0">
                             <div class="chat-header colorHeader text-center">
-                                <h3 class="text-center">{{salaActual.nombreSala}}</h3>
-                                <small v-if="salaActual.consulta.estado==5">Cliente solicitó finalizar la consulta</small>
-                                <small v-if="salaActual.consulta.estado==6">Especialista solicitó finalizar la consulta</small><br>
-                                <button v-if="salaActual.consulta.estado!=7"  type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <h3 v-if="salaActual!=null" class="text-center">{{salaActual.nombreSala}}</h3>
+                                <small v-if="salaActual!=null && salaActual.consulta.estado==5">Cliente solicitó finalizar la consulta</small>
+                                <small v-if="salaActual!=null && salaActual.consulta.estado==6">Especialista solicitó finalizar la consulta</small><br>
+                                <button v-if="salaActual!=null && salaActual.consulta.estado!=7"  type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 Finaliza consulta
                                 </button>
 
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-danger" @click="terminarConver(salaActual.consulta.id);" data-bs-dismiss="modal">Si, terminar</button>
+                                        <button v-if="salaActual!=null" type="button" class="btn btn-danger" @click="terminarConver(salaActual.consulta.id);" data-bs-dismiss="modal">Si, terminar</button>
                                     </div>
                                     </div>
                                 </div>
