@@ -21,114 +21,45 @@
             
             <!----->
              <div class="row">
-                <div class="col-md-4">
-                    <div class="card user-card">
-                       
-                        <div class="card-block">
-                           
-                            <h4 class="f-w-600 mt-2 m-b-10">Especialista1 Apellido1</h4>
-                            <p class="text-muted"><span class="badge bg-primary">Anti corrupción</span> | <span class="badge bg-warning text-dark">Derecho deportivo</span> | <span class="badge bg-info text-dark">Legislación médica</span></p>
-                            <hr>
-                            <p class="x m-t-15 mb-0">Nivel de actividad 60%</p>
-                            <ul class="list-unstyled activity-leval mt-0">
-                                <li class="active"></li>
-                                <li class="active"></li>
-                                <li class="active"></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                            <div class="colorBonito counter-block m-t-10 pt-2">
-                                <div class="row">
-                                    <div class="col-6">
-                                       
-                                          <p><b class="text-dark">Respuestas</b> <br> 189</p>
-                                    </div>
-                                   
-                                    <div class="col-6">
-                                      
-                                        <p><b class="text-dark">Consultas</b> <br> 189</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="m-t-15 text-muted"><button class="btn boton-principal text-white">Realizar Consulta</button></p>
-                            <hr>
-                           
-                        </div>
-                    </div>
-                </div>
-                
-                 <div class="col-md-4">
-                    <div class="card user-card">
-                       
-                        <div class="card-block">
-                           
-                            <h4 class="f-w-600 mt-2 m-b-10">Especialista1 Apellido1</h4>
-                            <p class="text-muted"><span class="badge bg-primary">Anti corrupción</span> | <span class="badge bg-warning text-dark">Derecho deportivo</span> | <span class="badge bg-info text-dark">Legislación médica</span></p>
-                            <hr>
-                            <p class="x m-t-15 mb-0">Nivel de actividad 60%</p>
-                            <ul class="list-unstyled activity-leval mt-0">
-                                <li class="active"></li>
-                                <li class="active"></li>
-                                <li class="active"></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                            <div class="colorBonito counter-block m-t-10 pt-2">
-                                <div class="row">
-                                    <div class="col-6">
-                                       
-                                          <p><b class="text-dark">Respuestas</b> <br> 189</p>
-                                    </div>
-                                   
-                                    <div class="col-6">
-                                      
-                                        <p><b class="text-dark">Consultas</b> <br> 189</p>
+                            <div v-for="especia in especialistas.data" :key="especia.id" class="col col-md-4 col-xl-4">
+                               
+                                <div class="card user-card">
+                                
+                                    <div class="card-block">
+                                    
+                                        <h4 class="f-w-600 mt-2 m-b-10">{{especia.usuario.name}}</h4>
+                                        <p class="text-muted"><span class="badge bg-primary">{{especia.especialidad.nombre}}</span></p>
+                                        <hr>
+                                        <p class="x m-t-15 mb-0">Nivel de actividad 60%</p>
+                                        <ul class="list-unstyled activity-leval mt-0">
+                                            <li class="active"></li>
+                                            <li class="active"></li>
+                                            <li class="active"></li>
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                        <div class="colorBonito counter-block m-t-10 pt-2">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                
+                                                    <p><b class="text-dark">Respuestas</b> <br> 189</p>
+                                                </div>
+                                            
+                                                <div class="col-6">
+                                                
+                                                    <p><b class="text-dark">Consultas</b> <br> 189</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="m-t-15 text-muted"><button class="btn boton-principal text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="abrirModal(especia);">Realizar Consulta</button></p>
+                                        <hr>
+                                    
                                     </div>
                                 </div>
                             </div>
-                            <p class="m-t-15 text-muted"><button class="btn boton-principal text-white">Realizar Consulta</button></p>
-                            <hr>
-                           
+                            
+                        
                         </div>
-                    </div>
-                </div>
-                
-                 <div class="col-md-4">
-                    <div class="card user-card">
-                       
-                        <div class="card-block">
-                           
-                            <h4 class="f-w-600 mt-2 m-b-10">Especialista1 Apellido1</h4>
-                            <p class="text-muted"><span class="badge bg-danger">Anti corrupción</span> | <span class="badge bg-dark">Derecho deportivo</span> | <span class="badge bg-info text-dark">Legislación médica</span></p>
-                            <hr>
-                            <p class="x m-t-15 mb-0">Nivel de actividad 80%</p>
-                            <ul class="list-unstyled activity-leval mt-0">
-                                <li class="active"></li>
-                                <li class="active"></li>
-                                <li class="active"></li>
-                                <li class="active"></li>
-                                <li></li>
-                            </ul>
-                            <div class="colorBonito counter-block m-t-10 pt-2">
-                                <div class="row">
-                                    <div class="col-6">
-                                       
-                                          <p><b class="text-dark">Respuestas</b> <br> 189</p>
-                                    </div>
-                                   
-                                    <div class="col-6">
-                                      
-                                        <p><b class="text-dark">Consultas</b> <br> 189</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="m-t-15 text-muted"><button class="btn boton-principal text-white">Realizar Consulta</button></p>
-                            <hr>
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!---->
             
 
@@ -145,10 +76,27 @@
     import { defineComponent } from 'vue'
     import FrontEnd from '@/Layouts/FrontEnd.vue'
 
-    export default defineComponent({
+    export default {
         components: {
             FrontEnd,
             
         },
-    })
+        data(){
+            return{
+                 especialistas:[],
+                 especialista:[],
+            }
+        },
+         methods:{
+            async listar(){
+              
+                const res = await axios.get('/especialistas/',{params:this.pagination,});
+                this.especialistas = res.data;
+            },
+        },
+         created(){
+            this.listar();
+        }
+        
+    }
 </script>

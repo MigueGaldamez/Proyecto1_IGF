@@ -8,7 +8,7 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+                    <img src="https://image.freepik.com/free-photo/close-up-workers-with-briefcases_1098-3096.jpg" width="100%" height="100%"/>
 
                     <div class="container">
                     <div class="carousel-caption text-start">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+                    <img src="https://image.freepik.com/free-photo/court-hammer-books-judgment-law-concept_144627-30461.jpg" width="100%" height="100%"/>
 
                     <div class="container">
                     <div class="carousel-caption">
@@ -30,8 +30,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
+                    <img src="https://image.freepik.com/free-photo/grey-marble-column-details-building_1359-886.jpg" width="100%" height="100%"/>
                     <div class="container">
                     <div class="carousel-caption text-end">
                         <h1>Nos importa tu opinion.</h1>
@@ -50,6 +49,7 @@
             <span class="visually-hidden">Next</span>
             </button>
         </div>
+      
         <div class="py-8">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 
@@ -63,7 +63,7 @@
                                 <div class="p-4">
                                     <div class="nav nav-tabs tabs text-center">
                                         <input type="radio" class="active" id="radio-1" name="tabs" checked data-bs-toggle="tab" data-bs-target="#nav-uno" role="tab" aria-controls="nav-uno" aria-selected="true"/>
-                                        <label class="tab" for="radio-1" >Nuevas<span class="notification">2</span></label>
+                                        <label class="tab" for="radio-1" >Nuevas<span class="notification">{{consultas.total}}</span></label>
                                         <input type="radio" name="tabs"  id="radio-2" data-bs-toggle="tab" data-bs-target="#nav-dos"  role="tab" aria-controls="nav-dos" aria-selected="false"/>
                                         <label class="tab" for="radio-2" >Mejor valoradas</label>
                                         <input type="radio" name="tabs" id="radio-3" data-bs-toggle="tab" data-bs-target="#nav-tres"  role="tab" aria-controls="nav-tres" aria-selected="false"/>
@@ -75,34 +75,26 @@
                                     <div class="tab-content mt-2" id="nav-tabContent">
                                         <div class="tab-pane fade show active px-4" id="nav-uno" role="tabpanel" aria-labelledby="radio-1">
                                             <div class="row">
-                                                <div class="col col-6">
+                                                <div v-for="consulta in consultas.data" :key="consulta.id" class="col col-6">
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <h5 class="card-title">¿Una asesoria legal aqui?</h5>
-                                                            <p class="card-text text-muted fst-italic">Algun texto de prueba que diga ver mas...</p>
-                                                            <small>Publicada el <b>13 - diciembre 2021</b></small>
+                                                            <h5 class="card-title">{{consulta.titulo}}</h5>
+                                                            <p class="card-text text-muted fst-italic">{{consulta.consulta}}</p>
+                                                            <small>Publicada el <b>{{consulta.created_At}}</b></small>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col col-6">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">¿Una asesoria legal aqui?</h5>
-                                                            <p class="card-text text-muted fst-italic">Algun texto de prueba que diga ver mas...</p>
-                                                            <small>Publicada el <b>13 - diciembre 2021</b></small>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="nav-dos" role="tabpanel" aria-labelledby="radio-2">
                                             <div class="row">
-                                                <div class="col col-6">
+                                                <div v-for="consulta in consultas.data" :key="consulta.id" class="col col-6">
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <h5 class="card-title">¿Una asesoria legal aqui, de las mejor valoradas?</h5>
-                                                            <p class="card-text text-muted fst-italic">Algun texto de prueba que diga ver mas...</p>
-                                                            <small>Publicada el <b>13 - diciembre 2021</b></small>
+                                                            <h5 class="card-title">{{consulta.titulo}}</h5>
+                                                            <p class="card-text text-muted fst-italic">{{consulta.consulta}}</p>
+                                                            <small>Publicada el <b>{{consulta.created_At}}</b></small>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -117,7 +109,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="nav-tres" role="tabpanel" aria-labelledby="radio-3">...3</div>
+                                        <div class="tab-pane fade" id="nav-tres" role="tabpanel" aria-labelledby="radio-3">
+                                            <div class="row">
+                                                <div v-for="consulta in consultas.data" :key="consulta.id" class="col col-6">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{consulta.titulo}}</h5>
+                                                            <p class="card-text text-muted fst-italic">{{consulta.consulta}}</p>
+                                                            <small>Publicada el <b>{{consulta.created_At}}</b></small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -130,15 +134,15 @@
                                 </div>   
                             <div class="row p-4">
                                
-                                <div class="col col-12">
+                                <div v-for="especia in especialistas.data" :key="especia.id" class="col col-12">
                                    <div class="card p-3">
                                         <div class="d-flex align-items-center">
                                             <div class="image"> <img src="https://avatars.githubusercontent.com/u/25284452?v=4" class="rounded" width="155"> </div>
                                             <div class="ml-3 w-100">
-                                                <h4 class="mb-0 mt-0">Alex Morrision</h4> <span>Especialista en leyes</span>
+                                                <h4 class="mb-0 mt-0">{{especia.usuario.name}}</h4> <span>{{especia.especialidad.nombre}}</span>
                                                 <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats px-4">
-                                                    <div class="d-flex flex-column"> <span class="articles">Preguntas</span> <span class="number1">38</span> </div>
-                                                    <div class="d-flex flex-column"> <span class="followers">Usuarios Contentos</span> <span class="number2">980</span> </div>
+                                                    <div class="d-flex flex-column"> <span class="articles">Preguntas</span> <span class="number1">{{especia.id}}</span> </div>
+                                                    <div class="d-flex flex-column"> <span class="followers">Usuarios Contentos</span> <span class="number2">{{especia.usuario.id}}</span> </div>
   
                                                 </div>
                                                 <div class="button mt-2 d-flex flex-row align-items-center"> 
@@ -149,25 +153,7 @@
                                         </div>
                                     </div> 
                                 </div>
-                                <div class="col col-12 mt-4">
-                                   <div class="card p-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="image"> <img src="https://avatars.githubusercontent.com/u/25284452?v=4" class="rounded" width="155"> </div>
-                                            <div class="ml-3 w-100">
-                                                <h4 class="mb-0 mt-0">Alex Morrision</h4> <span>Especialista en leyes</span>
-                                                <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats px-4">
-                                                    <div class="d-flex flex-column"> <span class="articles">Preguntas</span> <span class="number1">38</span> </div>
-                                                    <div class="d-flex flex-column"> <span class="followers">Usuarios Contentos</span> <span class="number2">980</span> </div>
-  
-                                                </div>
-                                                <div class="button mt-2 d-flex flex-row align-items-center"> 
-                                                    <button class="btn btn-sm btn-outline-primary w-100">Consultar</button> 
-                                                    <button class="btn btn-sm btn-primary w-100 ml-2">ver detalles</button> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                </div>
+                                
                             </div>
                             </div>
                         </div>
@@ -187,5 +173,25 @@
             FrontEnd,
          
         },
+         data(){
+            return{
+                 especialistas:[],
+                 especialista:[],
+                 consultas:[],
+            }
+        },
+         methods:{
+            async listar(){
+              
+                const res = await axios.get('/especialistas/',{params:this.pagination,});
+                this.especialistas = res.data;
+
+                const res2 = await axios.get('/consultas/');
+                this.consultas = res2.data;
+            },
+        },
+         created(){
+            this.listar();
+        }
     })
 </script>

@@ -23,45 +23,44 @@
                                     Inicio
                                 </jet-nav-link>
                             </div>
-                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                             <div  v-if="$page.props.user.idTipoUsuario==2 ||  $page.props.user.idTipoUsuario==1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('chat')" :active="route().current('chat')">
                                     Chat
                                 </jet-nav-link>
                             </div>
-
+                            
+                          
                         
                              
-                              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                              <div v-if="$page.props.user.idTipoUsuario==3" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('solicitudes')" :active="route().current('solicitudes')">
                                    Revisar Solicitud
                                 </jet-nav-link>
                             </div>
-                              <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                              <div  v-if="$page.props.user.idTipoUsuario==2 ||  $page.props.user.idTipoUsuario==1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('pagos')" :active="route().current('pagos')">
                                     Ver pagos
                                 </jet-nav-link>
                             </div>
                            
                           
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div  v-if="$page.props.user.idTipoUsuario==2 ||  $page.props.user.idTipoUsuario==1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('tarjeta.index')" :active="route().current('tarjeta.index')">
                                    Tarjetas
                                 </jet-nav-link>
                             </div>
-                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                             <div v-if="$page.props.user.idTipoUsuario==3" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" :active="route().current('clientesver','cliente.index','tipoUsuario.index')">
                                     Usuarios
                                 </jet-nav-link>
                                 <ul class="dropdown-menu">
-                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('clientesver')" >Editar Cliente</jet-nav-link></li>
-                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('asesores')">Editar Especialista</jet-nav-link></li>
+                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('asesores')">Listado Especialistas</jet-nav-link></li>
                                 
                                     <li><hr class="dropdown-divider"></li>
                                     <li ><jet-nav-link class="dropdown-item  px-3" :href="route('clientesver')" >Listado clientes</jet-nav-link></li>
-                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('asesores')" >Listado especialistas</jet-nav-link></li>
                                 </ul>
                              </div>
-                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                             <div v-if="$page.props.user.idTipoUsuario==3" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" :active="route().current('especialidad.index','cliente.index','tipoUsuario.index')">
                                     Administracion
                                 </jet-nav-link>
@@ -78,13 +77,13 @@
                                     Consultas
                                 </jet-nav-link>
                                 <ul class="dropdown-menu">
-                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultas')" >Ver Consultas</jet-nav-link></li>
-                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultasrealizadas')">Consultas Cliente</jet-nav-link></li>
-                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('consultaspendientes')">Consultas Especialista</jet-nav-link></li>
+                                    <li v-if="$page.props.user.idTipoUsuario==3"><jet-nav-link class="dropdown-item  px-3" :href="route('consultas')" >Ver Consultas</jet-nav-link></li>
+                                    <li v-if="$page.props.user.idTipoUsuario==1" ><jet-nav-link class="dropdown-item  px-3" :href="route('consultasrealizadas')">Ver Consultas</jet-nav-link></li>
+                                    <li v-if="$page.props.user.idTipoUsuario==2" ><jet-nav-link class="dropdown-item  px-3" :href="route('consultaspendientes')">Ver Consultas</jet-nav-link></li>
                                     
                                 
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li ><jet-nav-link class="dropdown-item  px-3" :href="route('realizarconsulta')" >Realizar consulta</jet-nav-link></li>
+                                    <li  v-if="$page.props.user.idTipoUsuario==1"><hr class="dropdown-divider"></li>
+                                    <li v-if="$page.props.user.idTipoUsuario==1" ><jet-nav-link class="dropdown-item  px-3" :href="route('realizarconsulta')" >Realizar consulta</jet-nav-link></li>
                                 </ul>
                              </div>
                                 

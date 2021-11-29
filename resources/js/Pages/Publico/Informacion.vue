@@ -38,12 +38,11 @@
             <hr class="featurette-divider">
             <div class="row featurette">
                 <div class="col-md-7">
-                    <h2 class="featurette-heading">Primera Caracteristica. <span class="text-muted">Te sorprendera</span></h2>
+                    <h2 class="featurette-heading">Totalmente personalisadas. <span class="text-muted">Solo tú y el especialista</span></h2>
                     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</p>
                 </div>
                 <div class="col-md-5">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-
+                    <img src="https://image.freepik.com/free-vector/speech-therapy-abstract-concept-vector-illustration-speech-pathology-therapy-improve-language-development-delay-speaking-disability-treatment-tongue-exercise-home-abstract-metaphor_335657-1577.jpg"  width="400" height="400" />
                 </div>
             </div>
 
@@ -51,11 +50,12 @@
 
             <div class="row featurette">
                 <div class="col-md-7 order-md-2">
-                     <h2 class="featurette-heading">Segunda Caracteristica. <span class="text-muted">Te sorprendera</span></h2>
+                     <h2 class="featurette-heading">Atencion las 24horas. <span class="text-muted">Te sorprendera</span></h2>
                     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</p>
                 </div>
                 <div class="col-md-5 order-md-1">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+                    <img src="https://image.freepik.com/free-vector/service-24-7-concept-illustration_114360-7620.jpg"  width="400" height="400" />
+                    
 
                 </div>
             </div>
@@ -64,11 +64,11 @@
 
             <div class="row featurette">
                 <div class="col-md-7">
-                     <h2 class="featurette-heading">Tercera Caracteristica. <span class="text-muted">Te sorprendera</span></h2>
+                     <h2 class="featurette-heading">Especialistas de todas las ramas. <span class="text-muted">para garantizar tu respuesta </span></h2>
                     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</p>
                 </div>
                 <div class="col-md-5">
-                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+                    <img src="https://image.freepik.com/free-vector/flat-customer-support-illustration_23-2148899114.jpg"  width="400" height="400" />
 
                 </div>
             </div>
